@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: notification-service
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/notifications
+      username: admin
+      password: password
+      authentication-database: admin
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: admin
+    password: password
+  mail:
+    host: localhost
+    port: 1025
+    username: 
+    password: 
+    properties:
+      mail:
+        smtp:
+          auth: false
+          starttls:
+            enable: false
+
+server:
+  port: 8080
+
+logging:
+  level:
+    com.microservices.notificationservice: DEBUG
