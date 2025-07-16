@@ -326,11 +326,15 @@ ENTRYPOINT ["java", "-jar", "/app.jar"]
 ## 🔧 Essential Tools & Technologies
 
 ### Backend (Java)
-- **Framework**: Spring Boot 2.7+
+- **Framework**: Spring Boot 3.2+ (Jakarta EE 9+)
+- **Java Version**: Java 17+ (required)
+- **Spring Security**: 6.x
+- **JPA/Hibernate**: 6.3.x
 - **API Documentation**: Swagger/OpenAPI
 - **Testing**: JUnit 5, Testcontainers
 - **Monitoring**: Micrometer + Prometheus
 - **Service Discovery**: Spring Cloud Netflix Eureka
+- **Build Tool**: Gradle 8.5+
 
 ### Frontend (Vue.js)
 - **Framework**: Vue 3 + Composition API
@@ -346,16 +350,40 @@ ENTRYPOINT ["java", "-jar", "/app.jar"]
 - **Monitoring**: Grafana + Prometheus
 - **Logging**: ELK Stack (Elasticsearch, Logstash, Kibana)
 
+## 📊 Current Tech Stack Versions
+
+| Component | Version | Notes |
+|-----------|---------|-------|
+| **Java** | 17+ | Minimum requirement for Spring Boot 3 |
+| **Spring Boot** | 3.2.0 | Latest stable with Jakarta EE support |
+| **Spring Security** | 6.x | Modern security configuration |
+| **Hibernate** | 6.3.x | Latest JPA implementation |
+| **Gradle** | 8.5+ | Build tool with Spring Boot 3 support |
+| **PostgreSQL** | 13+ | Primary database |
+| **MongoDB** | 5.0+ | Document database for notifications |
+| **Redis** | 6.2+ | Caching and session storage |
+| **RabbitMQ** | 3.x | Message queue system |
+| **Vue.js** | 3.x | Frontend framework |
+| **Docker** | 20.x+ | Containerization |
+| **Jakarta EE** | 9+ | Enterprise Java standard |
+
+### 🔄 Migration Notes
+- **Namespace Migration**: All services use `jakarta.*` instead of `javax.*`
+- **Security Configuration**: Modern `SecurityFilterChain` approach
+- **Method Security**: Updated to `@EnableMethodSecurity`
+- **Servlet Container**: Tomcat 10.x with Jakarta Servlet API
+
 ---
 
 ## 📋 Step-by-Step Learning Path
 
 ### Phase 1: Foundation (Week 1-2)
-- [ ] Set up local development environment
-- [ ] Create User Service with basic CRUD operations
+- [ ] Set up local development environment (Java 17+, Gradle 8.5+)
+- [ ] Create User Service with Spring Boot 3.2 and basic CRUD operations
 - [ ] Set up PostgreSQL database
 - [ ] Build simple Vue.js frontend for user management
 - [ ] Test direct service-to-frontend communication
+- [ ] Verify Jakarta EE namespace compliance
 
 ### Phase 2: Service Communication (Week 3-4)
 - [ ] Add Product Service
@@ -390,12 +418,14 @@ ENTRYPOINT ["java", "-jar", "/app.jar"]
 ## 🎯 Learning Outcomes
 
 ### What You'll Master
+- **Modern Spring Boot 3**: Jakarta EE, enhanced security, performance improvements
 - **Service Design**: How to decompose applications into services
 - **Inter-Service Communication**: REST APIs, messaging, event-driven architecture
 - **Data Management**: Database-per-service, eventual consistency, distributed transactions
 - **Infrastructure**: Docker, networking, service discovery, load balancing
 - **Monitoring**: Logging, metrics, distributed tracing, health checks
 - **Frontend Integration**: How SPAs consume microservices
+- **Migration Strategies**: From Spring Boot 2.x to 3.x patterns
 
 ### Common Challenges You'll Solve
 - Service startup dependencies

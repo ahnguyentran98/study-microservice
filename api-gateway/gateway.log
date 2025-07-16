@@ -1,0 +1,194 @@
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.0)
+
+2025-07-16T14:51:45.212+07:00  INFO 877405 --- [api-gateway] [           main] c.m.apigateway.ApiGatewayApplication     : Starting ApiGatewayApplication v1.0.0 using Java 17.0.15 with PID 877405 (/home/ahne/Documents/private/study-microservice/api-gateway/build/libs/api-gateway-1.0.0.jar started by ahne in /home/ahne/Documents/private/study-microservice/api-gateway)
+2025-07-16T14:51:45.214+07:00 DEBUG 877405 --- [api-gateway] [           main] c.m.apigateway.ApiGatewayApplication     : Running with Spring Boot v3.2.0, Spring v6.1.1
+2025-07-16T14:51:45.214+07:00  INFO 877405 --- [api-gateway] [           main] c.m.apigateway.ApiGatewayApplication     : No active profile set, falling back to 1 default profile: "default"
+2025-07-16T14:51:46.154+07:00  INFO 877405 --- [api-gateway] [           main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=f722ee69-6874-30a4-a508-50de216b372c
+2025-07-16T14:51:46.200+07:00  WARN 877405 --- [api-gateway] [           main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$LoadBalancerInterceptorConfig' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$LoadBalancerInterceptorConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [lbRestClientPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2025-07-16T14:51:46.202+07:00  WARN 877405 --- [api-gateway] [           main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.cloud.loadbalancer.config.BlockingLoadBalancerClientAutoConfiguration' of type [org.springframework.cloud.loadbalancer.config.BlockingLoadBalancerClientAutoConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2025-07-16T14:51:46.204+07:00  WARN 877405 --- [api-gateway] [           main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.cloud.loadbalancer.config.LoadBalancerAutoConfiguration' of type [org.springframework.cloud.loadbalancer.config.LoadBalancerAutoConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2025-07-16T14:51:46.209+07:00  WARN 877405 --- [api-gateway] [           main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.cloud.commons.config.CommonsConfigAutoConfiguration' of type [org.springframework.cloud.commons.config.CommonsConfigAutoConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2025-07-16T14:51:46.210+07:00  WARN 877405 --- [api-gateway] [           main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerDefaultMappingsProviderAutoConfiguration' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerDefaultMappingsProviderAutoConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2025-07-16T14:51:46.211+07:00  WARN 877405 --- [api-gateway] [           main] trationDelegate$BeanPostProcessorChecker : Bean 'loadBalancerClientsDefaultsMappingsProvider' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerDefaultMappingsProviderAutoConfiguration$$Lambda$481/0x000078fa203c2f50] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2025-07-16T14:51:46.212+07:00  WARN 877405 --- [api-gateway] [           main] trationDelegate$BeanPostProcessorChecker : Bean 'defaultsBindHandlerAdvisor' of type [org.springframework.cloud.commons.config.DefaultsBindHandlerAdvisor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2025-07-16T14:51:46.217+07:00  WARN 877405 --- [api-gateway] [           main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.cloud.loadbalancer-org.springframework.cloud.client.loadbalancer.LoadBalancerClientsProperties' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerClientsProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2025-07-16T14:51:46.221+07:00  WARN 877405 --- [api-gateway] [           main] trationDelegate$BeanPostProcessorChecker : Bean 'default.org.springframework.cloud.loadbalancer.config.LoadBalancerAutoConfiguration.LoadBalancerClientSpecification' of type [org.springframework.cloud.loadbalancer.annotation.LoadBalancerClientSpecification] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2025-07-16T14:51:46.222+07:00  WARN 877405 --- [api-gateway] [           main] trationDelegate$BeanPostProcessorChecker : Bean 'default.org.springframework.cloud.loadbalancer.config.BlockingLoadBalancerClientAutoConfiguration.LoadBalancerClientSpecification' of type [org.springframework.cloud.loadbalancer.annotation.LoadBalancerClientSpecification] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2025-07-16T14:51:46.224+07:00  WARN 877405 --- [api-gateway] [           main] trationDelegate$BeanPostProcessorChecker : Bean 'loadBalancerClientFactory' of type [org.springframework.cloud.loadbalancer.support.LoadBalancerClientFactory] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2025-07-16T14:51:46.226+07:00  WARN 877405 --- [api-gateway] [           main] trationDelegate$BeanPostProcessorChecker : Bean 'blockingLoadBalancerClient' of type [org.springframework.cloud.loadbalancer.blocking.client.BlockingLoadBalancerClient] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2025-07-16T14:51:46.232+07:00  WARN 877405 --- [api-gateway] [           main] trationDelegate$BeanPostProcessorChecker : Bean 'loadBalancerServiceInstanceCookieTransformer' of type [org.springframework.cloud.loadbalancer.core.LoadBalancerServiceInstanceCookieTransformer] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2025-07-16T14:51:46.233+07:00  WARN 877405 --- [api-gateway] [           main] trationDelegate$BeanPostProcessorChecker : Bean 'xForwarderHeadersTransformer' of type [org.springframework.cloud.loadbalancer.blocking.XForwardedHeadersTransformer] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2025-07-16T14:51:46.233+07:00  WARN 877405 --- [api-gateway] [           main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2025-07-16T14:51:46.234+07:00  WARN 877405 --- [api-gateway] [           main] trationDelegate$BeanPostProcessorChecker : Bean 'loadBalancerRequestFactory' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerRequestFactory] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2025-07-16T14:51:46.235+07:00  WARN 877405 --- [api-gateway] [           main] trationDelegate$BeanPostProcessorChecker : Bean 'loadBalancerInterceptor' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2025-07-16T14:51:46.236+07:00  WARN 877405 --- [api-gateway] [           main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration' of type [org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [loadBalancerWebClientBuilderBeanPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2025-07-16T14:51:46.239+07:00  WARN 877405 --- [api-gateway] [           main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration$ReactorDeferringLoadBalancerFilterConfig' of type [org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration$ReactorDeferringLoadBalancerFilterConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [loadBalancerWebClientBuilderBeanPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2025-07-16T14:51:46.240+07:00  WARN 877405 --- [api-gateway] [           main] trationDelegate$BeanPostProcessorChecker : Bean 'reactorDeferringLoadBalancerExchangeFilterFunction' of type [org.springframework.cloud.client.loadbalancer.reactive.DeferringLoadBalancerExchangeFilterFunction] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [loadBalancerWebClientBuilderBeanPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2025-07-16T14:51:46.741+07:00 DEBUG 877405 --- [api-gateway] [           main] o.s.c.gateway.config.GatewayProperties   : Routes supplied from Gateway Properties: [RouteDefinition{id='user-service', predicates=[PredicateDefinition{name='Path', args={_genkey_0=/api/users/**}}], filters=[FilterDefinition{name='CircuitBreaker', args={name=user-service, fallbackUri=forward:/fallback}}, FilterDefinition{name='RequestRateLimiter', args={redis-rate-limiter.replenishRate=10, redis-rate-limiter.burstCapacity=20, redis-rate-limiter.requestedTokens=1}}], uri=http://localhost:8081, order=0, metadata={}}, RouteDefinition{id='product-service', predicates=[PredicateDefinition{name='Path', args={_genkey_0=/api/products/**}}], filters=[FilterDefinition{name='CircuitBreaker', args={name=product-service, fallbackUri=forward:/fallback}}, FilterDefinition{name='RequestRateLimiter', args={redis-rate-limiter.replenishRate=10, redis-rate-limiter.burstCapacity=20, redis-rate-limiter.requestedTokens=1}}], uri=http://localhost:8082, order=0, metadata={}}, RouteDefinition{id='order-service', predicates=[PredicateDefinition{name='Path', args={_genkey_0=/api/orders/**}}], filters=[FilterDefinition{name='CircuitBreaker', args={name=order-service, fallbackUri=forward:/fallback}}, FilterDefinition{name='RequestRateLimiter', args={redis-rate-limiter.replenishRate=10, redis-rate-limiter.burstCapacity=20, redis-rate-limiter.requestedTokens=1}}], uri=http://localhost:8083, order=0, metadata={}}, RouteDefinition{id='payment-service', predicates=[PredicateDefinition{name='Path', args={_genkey_0=/api/payments/**}}], filters=[FilterDefinition{name='CircuitBreaker', args={name=payment-service, fallbackUri=forward:/fallback}}, FilterDefinition{name='RequestRateLimiter', args={redis-rate-limiter.replenishRate=10, redis-rate-limiter.burstCapacity=20, redis-rate-limiter.requestedTokens=1}}], uri=http://localhost:8084, order=0, metadata={}}, RouteDefinition{id='notification-service', predicates=[PredicateDefinition{name='Path', args={_genkey_0=/api/notifications/**}}], filters=[FilterDefinition{name='CircuitBreaker', args={name=notification-service, fallbackUri=forward:/fallback}}, FilterDefinition{name='RequestRateLimiter', args={redis-rate-limiter.replenishRate=10, redis-rate-limiter.burstCapacity=20, redis-rate-limiter.requestedTokens=1}}], uri=http://localhost:8085, order=0, metadata={}}]
+2025-07-16T14:51:46.887+07:00  INFO 877405 --- [api-gateway] [           main] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [After]
+2025-07-16T14:51:46.888+07:00  INFO 877405 --- [api-gateway] [           main] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [Before]
+2025-07-16T14:51:46.888+07:00  INFO 877405 --- [api-gateway] [           main] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [Between]
+2025-07-16T14:51:46.888+07:00  INFO 877405 --- [api-gateway] [           main] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [Cookie]
+2025-07-16T14:51:46.888+07:00  INFO 877405 --- [api-gateway] [           main] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [Header]
+2025-07-16T14:51:46.888+07:00  INFO 877405 --- [api-gateway] [           main] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [Host]
+2025-07-16T14:51:46.888+07:00  INFO 877405 --- [api-gateway] [           main] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [Method]
+2025-07-16T14:51:46.888+07:00  INFO 877405 --- [api-gateway] [           main] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [Path]
+2025-07-16T14:51:46.888+07:00  INFO 877405 --- [api-gateway] [           main] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [Query]
+2025-07-16T14:51:46.888+07:00  INFO 877405 --- [api-gateway] [           main] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [ReadBody]
+2025-07-16T14:51:46.888+07:00  INFO 877405 --- [api-gateway] [           main] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [RemoteAddr]
+2025-07-16T14:51:46.888+07:00  INFO 877405 --- [api-gateway] [           main] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [XForwardedRemoteAddr]
+2025-07-16T14:51:46.888+07:00  INFO 877405 --- [api-gateway] [           main] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [Weight]
+2025-07-16T14:51:46.888+07:00  INFO 877405 --- [api-gateway] [           main] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [CloudFoundryRouteService]
+2025-07-16T14:51:46.941+07:00 DEBUG 877405 --- [api-gateway] [           main] s.w.r.r.m.a.RequestMappingHandlerMapping : 8 mappings in 'requestMappingHandlerMapping'
+2025-07-16T14:51:46.948+07:00 DEBUG 877405 --- [api-gateway] [           main] o.s.w.r.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2025-07-16T14:51:47.022+07:00  INFO 877405 --- [api-gateway] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 4 endpoint(s) beneath base path '/actuator'
+2025-07-16T14:51:47.058+07:00 DEBUG 877405 --- [api-gateway] [           main] o.s.w.r.r.m.a.ControllerMethodResolver   : ControllerAdvice beans: none
+2025-07-16T14:51:47.190+07:00  WARN 877405 --- [api-gateway] [           main] iguration$LoadBalancerCaffeineWarnLogger : Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2025-07-16T14:51:47.274+07:00  INFO 877405 --- [api-gateway] [           main] o.s.b.web.embedded.netty.NettyWebServer  : Netty started on port 8080
+2025-07-16T14:51:47.373+07:00 DEBUG 877405 --- [api-gateway] [           main] o.s.c.g.r.RouteDefinitionRouteLocator    : RouteDefinition user-service applying {_genkey_0=/api/users/**} to Path
+2025-07-16T14:51:47.380+07:00 DEBUG 877405 --- [api-gateway] [           main] o.s.c.g.r.RouteDefinitionRouteLocator    : RouteDefinition user-service applying filter {name=user-service, fallbackUri=forward:/fallback} to CircuitBreaker
+2025-07-16T14:51:47.389+07:00 ERROR 877405 --- [api-gateway] [           main] o.s.c.gateway.route.CachingRouteLocator  : Refresh routes error !!!
+
+java.lang.IllegalArgumentException: Unable to find GatewayFilterFactory with name RequestRateLimiter
+	at org.springframework.cloud.gateway.route.RouteDefinitionRouteLocator.loadGatewayFilters(RouteDefinitionRouteLocator.java:145) ~[spring-cloud-gateway-server-4.1.0.jar!/:4.1.0]
+	at org.springframework.cloud.gateway.route.RouteDefinitionRouteLocator.getFilters(RouteDefinitionRouteLocator.java:192) ~[spring-cloud-gateway-server-4.1.0.jar!/:4.1.0]
+	at org.springframework.cloud.gateway.route.RouteDefinitionRouteLocator.convertToRoute(RouteDefinitionRouteLocator.java:132) ~[spring-cloud-gateway-server-4.1.0.jar!/:4.1.0]
+	at reactor.core.publisher.FluxMap$MapSubscriber.onNext(FluxMap.java:106) ~[reactor-core-3.6.0.jar!/:3.6.0]
+	at reactor.core.publisher.FluxFlatMap$FlatMapMain.tryEmitScalar(FluxFlatMap.java:492) ~[reactor-core-3.6.0.jar!/:3.6.0]
+	at reactor.core.publisher.FluxFlatMap$FlatMapMain.onNext(FluxFlatMap.java:424) ~[reactor-core-3.6.0.jar!/:3.6.0]
+	at reactor.core.publisher.FluxMergeSequential$MergeSequentialMain.drain(FluxMergeSequential.java:439) ~[reactor-core-3.6.0.jar!/:3.6.0]
+	at reactor.core.publisher.FluxMergeSequential$MergeSequentialMain.innerComplete(FluxMergeSequential.java:335) ~[reactor-core-3.6.0.jar!/:3.6.0]
+	at reactor.core.publisher.FluxMergeSequential$MergeSequentialInner.onSubscribe(FluxMergeSequential.java:559) ~[reactor-core-3.6.0.jar!/:3.6.0]
+	at reactor.core.publisher.FluxIterable.subscribe(FluxIterable.java:201) ~[reactor-core-3.6.0.jar!/:3.6.0]
+	at reactor.core.publisher.FluxIterable.subscribe(FluxIterable.java:83) ~[reactor-core-3.6.0.jar!/:3.6.0]
+	at reactor.core.publisher.Flux.subscribe(Flux.java:8777) ~[reactor-core-3.6.0.jar!/:3.6.0]
+	at reactor.core.publisher.FluxMergeSequential$MergeSequentialMain.onNext(FluxMergeSequential.java:237) ~[reactor-core-3.6.0.jar!/:3.6.0]
+	at reactor.core.publisher.FluxIterable$IterableSubscription.slowPath(FluxIterable.java:335) ~[reactor-core-3.6.0.jar!/:3.6.0]
+	at reactor.core.publisher.FluxIterable$IterableSubscription.request(FluxIterable.java:294) ~[reactor-core-3.6.0.jar!/:3.6.0]
+	at reactor.core.publisher.FluxMergeSequential$MergeSequentialMain.onSubscribe(FluxMergeSequential.java:198) ~[reactor-core-3.6.0.jar!/:3.6.0]
+	at reactor.core.publisher.FluxIterable.subscribe(FluxIterable.java:201) ~[reactor-core-3.6.0.jar!/:3.6.0]
+	at reactor.core.publisher.FluxIterable.subscribe(FluxIterable.java:83) ~[reactor-core-3.6.0.jar!/:3.6.0]
+	at reactor.core.publisher.Flux.subscribe(Flux.java:8777) ~[reactor-core-3.6.0.jar!/:3.6.0]
+	at reactor.core.publisher.FluxMergeSequential$MergeSequentialMain.onNext(FluxMergeSequential.java:237) ~[reactor-core-3.6.0.jar!/:3.6.0]
+	at reactor.core.publisher.FluxIterable$IterableSubscription.slowPath(FluxIterable.java:335) ~[reactor-core-3.6.0.jar!/:3.6.0]
+	at reactor.core.publisher.FluxIterable$IterableSubscription.request(FluxIterable.java:294) ~[reactor-core-3.6.0.jar!/:3.6.0]
+	at reactor.core.publisher.FluxMergeSequential$MergeSequentialMain.onSubscribe(FluxMergeSequential.java:198) ~[reactor-core-3.6.0.jar!/:3.6.0]
+	at reactor.core.publisher.FluxIterable.subscribe(FluxIterable.java:201) ~[reactor-core-3.6.0.jar!/:3.6.0]
+	at reactor.core.publisher.FluxIterable.subscribe(FluxIterable.java:83) ~[reactor-core-3.6.0.jar!/:3.6.0]
+	at reactor.core.publisher.Mono.subscribe(Mono.java:4512) ~[reactor-core-3.6.0.jar!/:3.6.0]
+	at reactor.core.publisher.Mono.subscribeWith(Mono.java:4578) ~[reactor-core-3.6.0.jar!/:3.6.0]
+	at reactor.core.publisher.Mono.subscribe(Mono.java:4478) ~[reactor-core-3.6.0.jar!/:3.6.0]
+	at reactor.core.publisher.Mono.subscribe(Mono.java:4414) ~[reactor-core-3.6.0.jar!/:3.6.0]
+	at reactor.core.publisher.Mono.subscribe(Mono.java:4386) ~[reactor-core-3.6.0.jar!/:3.6.0]
+	at org.springframework.cloud.gateway.route.CachingRouteLocator.onApplicationEvent(CachingRouteLocator.java:102) ~[spring-cloud-gateway-server-4.1.0.jar!/:4.1.0]
+	at org.springframework.cloud.gateway.route.CachingRouteLocator.onApplicationEvent(CachingRouteLocator.java:41) ~[spring-cloud-gateway-server-4.1.0.jar!/:4.1.0]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:178) ~[spring-context-6.1.1.jar!/:6.1.1]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:171) ~[spring-context-6.1.1.jar!/:6.1.1]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:149) ~[spring-context-6.1.1.jar!/:6.1.1]
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:445) ~[spring-context-6.1.1.jar!/:6.1.1]
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:378) ~[spring-context-6.1.1.jar!/:6.1.1]
+	at org.springframework.cloud.gateway.route.RouteRefreshListener.reset(RouteRefreshListener.java:73) ~[spring-cloud-gateway-server-4.1.0.jar!/:4.1.0]
+	at org.springframework.cloud.gateway.route.RouteRefreshListener.onApplicationEvent(RouteRefreshListener.java:50) ~[spring-cloud-gateway-server-4.1.0.jar!/:4.1.0]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:178) ~[spring-context-6.1.1.jar!/:6.1.1]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:171) ~[spring-context-6.1.1.jar!/:6.1.1]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:149) ~[spring-context-6.1.1.jar!/:6.1.1]
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:445) ~[spring-context-6.1.1.jar!/:6.1.1]
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:378) ~[spring-context-6.1.1.jar!/:6.1.1]
+	at org.springframework.context.support.AbstractApplicationContext.finishRefresh(AbstractApplicationContext.java:968) ~[spring-context-6.1.1.jar!/:6.1.1]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:619) ~[spring-context-6.1.1.jar!/:6.1.1]
+	at org.springframework.boot.web.reactive.context.ReactiveWebServerApplicationContext.refresh(ReactiveWebServerApplicationContext.java:66) ~[spring-boot-3.2.0.jar!/:3.2.0]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:753) ~[spring-boot-3.2.0.jar!/:3.2.0]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:455) ~[spring-boot-3.2.0.jar!/:3.2.0]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:323) ~[spring-boot-3.2.0.jar!/:3.2.0]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1342) ~[spring-boot-3.2.0.jar!/:3.2.0]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1331) ~[spring-boot-3.2.0.jar!/:3.2.0]
+	at com.microservices.apigateway.ApiGatewayApplication.main(ApiGatewayApplication.java:13) ~[!/:1.0.0]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569) ~[na:na]
+	at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:91) ~[api-gateway-1.0.0.jar:1.0.0]
+	at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:53) ~[api-gateway-1.0.0.jar:1.0.0]
+	at org.springframework.boot.loader.launch.JarLauncher.main(JarLauncher.java:58) ~[api-gateway-1.0.0.jar:1.0.0]
+
+2025-07-16T14:51:47.393+07:00 DEBUG 877405 --- [api-gateway] [           main] o.s.c.g.r.RouteDefinitionRouteLocator    : RouteDefinition user-service applying {_genkey_0=/api/users/**} to Path
+2025-07-16T14:51:47.394+07:00 DEBUG 877405 --- [api-gateway] [           main] o.s.c.g.r.RouteDefinitionRouteLocator    : RouteDefinition user-service applying filter {name=user-service, fallbackUri=forward:/fallback} to CircuitBreaker
+2025-07-16T14:51:47.395+07:00  WARN 877405 --- [api-gateway] [           main] onfigReactiveWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: java.lang.IllegalArgumentException: Unable to find GatewayFilterFactory with name RequestRateLimiter
+2025-07-16T14:51:49.414+07:00  INFO 877405 --- [api-gateway] [           main] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2025-07-16T14:51:49.423+07:00 ERROR 877405 --- [api-gateway] [           main] o.s.boot.SpringApplication               : Application run failed
+
+java.lang.IllegalArgumentException: Unable to find GatewayFilterFactory with name RequestRateLimiter
+	at org.springframework.cloud.gateway.route.RouteDefinitionRouteLocator.loadGatewayFilters(RouteDefinitionRouteLocator.java:145) ~[spring-cloud-gateway-server-4.1.0.jar!/:4.1.0]
+	at org.springframework.cloud.gateway.route.RouteDefinitionRouteLocator.getFilters(RouteDefinitionRouteLocator.java:192) ~[spring-cloud-gateway-server-4.1.0.jar!/:4.1.0]
+	at org.springframework.cloud.gateway.route.RouteDefinitionRouteLocator.convertToRoute(RouteDefinitionRouteLocator.java:132) ~[spring-cloud-gateway-server-4.1.0.jar!/:4.1.0]
+	at reactor.core.publisher.FluxMap$MapSubscriber.onNext(FluxMap.java:106) ~[reactor-core-3.6.0.jar!/:3.6.0]
+	at reactor.core.publisher.FluxFlatMap$FlatMapMain.tryEmitScalar(FluxFlatMap.java:492) ~[reactor-core-3.6.0.jar!/:3.6.0]
+	at reactor.core.publisher.FluxFlatMap$FlatMapMain.onNext(FluxFlatMap.java:424) ~[reactor-core-3.6.0.jar!/:3.6.0]
+	at reactor.core.publisher.FluxMergeSequential$MergeSequentialMain.drain(FluxMergeSequential.java:439) ~[reactor-core-3.6.0.jar!/:3.6.0]
+	at reactor.core.publisher.FluxMergeSequential$MergeSequentialMain.innerComplete(FluxMergeSequential.java:335) ~[reactor-core-3.6.0.jar!/:3.6.0]
+	at reactor.core.publisher.FluxMergeSequential$MergeSequentialInner.onSubscribe(FluxMergeSequential.java:559) ~[reactor-core-3.6.0.jar!/:3.6.0]
+	at reactor.core.publisher.FluxIterable.subscribe(FluxIterable.java:201) ~[reactor-core-3.6.0.jar!/:3.6.0]
+	at reactor.core.publisher.FluxIterable.subscribe(FluxIterable.java:83) ~[reactor-core-3.6.0.jar!/:3.6.0]
+	at reactor.core.publisher.Flux.subscribe(Flux.java:8777) ~[reactor-core-3.6.0.jar!/:3.6.0]
+	at reactor.core.publisher.FluxMergeSequential$MergeSequentialMain.onNext(FluxMergeSequential.java:237) ~[reactor-core-3.6.0.jar!/:3.6.0]
+	at reactor.core.publisher.FluxIterable$IterableSubscription.slowPath(FluxIterable.java:335) ~[reactor-core-3.6.0.jar!/:3.6.0]
+	at reactor.core.publisher.FluxIterable$IterableSubscription.request(FluxIterable.java:294) ~[reactor-core-3.6.0.jar!/:3.6.0]
+	at reactor.core.publisher.FluxMergeSequential$MergeSequentialMain.onSubscribe(FluxMergeSequential.java:198) ~[reactor-core-3.6.0.jar!/:3.6.0]
+	at reactor.core.publisher.FluxIterable.subscribe(FluxIterable.java:201) ~[reactor-core-3.6.0.jar!/:3.6.0]
+	at reactor.core.publisher.FluxIterable.subscribe(FluxIterable.java:83) ~[reactor-core-3.6.0.jar!/:3.6.0]
+	at reactor.core.publisher.Flux.subscribe(Flux.java:8777) ~[reactor-core-3.6.0.jar!/:3.6.0]
+	at reactor.core.publisher.FluxMergeSequential$MergeSequentialMain.onNext(FluxMergeSequential.java:237) ~[reactor-core-3.6.0.jar!/:3.6.0]
+	at reactor.core.publisher.FluxIterable$IterableSubscription.slowPath(FluxIterable.java:335) ~[reactor-core-3.6.0.jar!/:3.6.0]
+	at reactor.core.publisher.FluxIterable$IterableSubscription.request(FluxIterable.java:294) ~[reactor-core-3.6.0.jar!/:3.6.0]
+	at reactor.core.publisher.FluxMergeSequential$MergeSequentialMain.onSubscribe(FluxMergeSequential.java:198) ~[reactor-core-3.6.0.jar!/:3.6.0]
+	at reactor.core.publisher.FluxIterable.subscribe(FluxIterable.java:201) ~[reactor-core-3.6.0.jar!/:3.6.0]
+	at reactor.core.publisher.FluxIterable.subscribe(FluxIterable.java:83) ~[reactor-core-3.6.0.jar!/:3.6.0]
+	at reactor.core.publisher.InternalFluxOperator.subscribe(InternalFluxOperator.java:68) ~[reactor-core-3.6.0.jar!/:3.6.0]
+	at reactor.core.publisher.FluxDefer.subscribe(FluxDefer.java:54) ~[reactor-core-3.6.0.jar!/:3.6.0]
+	at reactor.core.publisher.Flux.subscribe(Flux.java:8777) ~[reactor-core-3.6.0.jar!/:3.6.0]
+	at reactor.core.publisher.Flux.blockLast(Flux.java:2755) ~[reactor-core-3.6.0.jar!/:3.6.0]
+	at org.springframework.cloud.gateway.filter.WeightCalculatorWebFilter.lambda$onApplicationEvent$0(WeightCalculatorWebFilter.java:140) ~[spring-cloud-gateway-server-4.1.0.jar!/:4.1.0]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory$DependencyObjectProvider.ifAvailable(DefaultListableBeanFactory.java:2124) ~[spring-beans-6.1.1.jar!/:6.1.1]
+	at org.springframework.cloud.gateway.filter.WeightCalculatorWebFilter.onApplicationEvent(WeightCalculatorWebFilter.java:140) ~[spring-cloud-gateway-server-4.1.0.jar!/:4.1.0]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:178) ~[spring-context-6.1.1.jar!/:6.1.1]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:171) ~[spring-context-6.1.1.jar!/:6.1.1]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:149) ~[spring-context-6.1.1.jar!/:6.1.1]
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:445) ~[spring-context-6.1.1.jar!/:6.1.1]
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:378) ~[spring-context-6.1.1.jar!/:6.1.1]
+	at org.springframework.cloud.gateway.route.RouteRefreshListener.reset(RouteRefreshListener.java:73) ~[spring-cloud-gateway-server-4.1.0.jar!/:4.1.0]
+	at org.springframework.cloud.gateway.route.RouteRefreshListener.onApplicationEvent(RouteRefreshListener.java:50) ~[spring-cloud-gateway-server-4.1.0.jar!/:4.1.0]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:178) ~[spring-context-6.1.1.jar!/:6.1.1]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:171) ~[spring-context-6.1.1.jar!/:6.1.1]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:149) ~[spring-context-6.1.1.jar!/:6.1.1]
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:445) ~[spring-context-6.1.1.jar!/:6.1.1]
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:378) ~[spring-context-6.1.1.jar!/:6.1.1]
+	at org.springframework.context.support.AbstractApplicationContext.finishRefresh(AbstractApplicationContext.java:968) ~[spring-context-6.1.1.jar!/:6.1.1]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:619) ~[spring-context-6.1.1.jar!/:6.1.1]
+	at org.springframework.boot.web.reactive.context.ReactiveWebServerApplicationContext.refresh(ReactiveWebServerApplicationContext.java:66) ~[spring-boot-3.2.0.jar!/:3.2.0]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:753) ~[spring-boot-3.2.0.jar!/:3.2.0]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:455) ~[spring-boot-3.2.0.jar!/:3.2.0]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:323) ~[spring-boot-3.2.0.jar!/:3.2.0]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1342) ~[spring-boot-3.2.0.jar!/:3.2.0]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1331) ~[spring-boot-3.2.0.jar!/:3.2.0]
+	at com.microservices.apigateway.ApiGatewayApplication.main(ApiGatewayApplication.java:13) ~[!/:1.0.0]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569) ~[na:na]
+	at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:91) ~[api-gateway-1.0.0.jar:1.0.0]
+	at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:53) ~[api-gateway-1.0.0.jar:1.0.0]
+	at org.springframework.boot.loader.launch.JarLauncher.main(JarLauncher.java:58) ~[api-gateway-1.0.0.jar:1.0.0]
+	Suppressed: java.lang.Exception: #block terminated with an error
+		at reactor.core.publisher.BlockingSingleSubscriber.blockingGet(BlockingSingleSubscriber.java:103) ~[reactor-core-3.6.0.jar!/:3.6.0]
+		at reactor.core.publisher.Flux.blockLast(Flux.java:2756) ~[reactor-core-3.6.0.jar!/:3.6.0]
+		... 31 common frames omitted
+
