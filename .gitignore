@@ -1,0 +1,25 @@
+# Ignore Gradle build output and related files
+/build/
+**/build/
+.gradle/
+**/.gradle/
+# Ignore Gradle wrapper binaries
+**/gradle/wrapper/gradle-wrapper.jar
+# Ignore Gradle logs
+**/*.log
+# Ignore generated sources and test sources
+**/bin/
+**/generated-sources/
+**/generated-test-sources/
+# Ignore temporary files
+**/tmp/
+# Ignore local environment files
+.env
+# Ignore IDE files
+*.iml
+.idea/
+.vscode/
+# Ignore JARs and other artifacts
+**/*.jar
+**/*.war
+**/*.ear
