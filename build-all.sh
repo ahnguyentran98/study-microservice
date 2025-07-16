@@ -2,49 +2,59 @@
 
 echo "Building all microservices..."
 
-echo "Config gradle version to 7.6.1"
-sudo apt update
-
-sudo apt install zip unzip curl
-
-curl -s "https://get.sdkman.io" | bash
-
-source "$HOME/.sdkman/bin/sdkman-init.sh"
-
-sdk install gradle 7.6.1
-
-sdk use gradle 7.6.1
-
-echo "Config gradle version to 7.6.1 done"
 # Stop any existing Gradle daemons
-echo "Stop all gradle daemons"
 gradle --stop
 
 # Build Java services
 services=("user-service" "product-service" "order-service" "payment-service" "notification-service" "api-gateway")
 
 for service in "${services[@]}"; do
+    echo "================================================="
     echo "Building $service..."
-    cd "$service"
     
-    # Check if wrapper exists and is correct version
-    if [ ! -f "gradlew" ] || ! ./gradlew --version | grep -q "Gradle 7"; then
-        echo "Updating Gradle wrapper for $service..."
-        gradle wrapper --gradle-version 7.6.1
-        chmod +x gradlew
+    if [ ! -d "$service" ]; then
+        echo "❌ Directory $service not found, skipping..."
+        continue
     fi
     
-    # Build with the wrapper
-    ./gradlew clean build -x test --no-daemon
+    cd "$service"
+    
+    # Check if wrapper exists and works
+    if [ ! -f "gradlew" ] || ! ./gradlew --version > /dev/null 2>&1; then
+        echo "🔧 Fixing Gradle wrapper for $service..."
+        
+        # Clean old wrapper
+        rm -rf gradle/ gradlew gradlew.bat gradle.properties
+        
+        # Generate new wrapper
+        gradle wrapper --gradle-version 7.6.1
+        chmod +x gradlew
+        
+        # Verify wrapper works
+        if ! ./gradlew --version > /dev/null 2>&1; then
+            echo "❌ Failed to fix wrapper for $service"
+            cd ..
+            continue
+        fi
+        echo "✅ Wrapper fixed for $service"
+    fi
+    
+    # Build the service
+    echo "🏗️  Building $service..."
+    ./gradlew clean build -x test --no-daemon --stacktrace
     
     if [ $? -eq 0 ]; then
         echo "✅ $service built successfully"
     else
         echo "❌ $service build failed"
+        echo "Check the error above for details"
+        cd ..
         exit 1
     fi
+    
     cd ..
 done
 
+echo "================================================="
 echo "All services built successfully!"
 echo "Run 'docker-compose up --build' to start all services"
