@@ -28,7 +28,7 @@ public class UserController {
             @RequestHeader("X-User-Id") String userId,
             @RequestHeader("X-User-Role") String role) {
         
-        log.info("Getting profile for user: {} (ID: {}, Role: {})", userEmail, userId, role);
+        logger.info("Getting profile for user: {} (ID: {}, Role: {})", userEmail, userId, role);
         
         Optional<User> user = userService.findByEmail(userEmail);
         
@@ -47,7 +47,7 @@ public class UserController {
             @RequestHeader("X-User-Email") String userEmail,
             @RequestHeader("X-User-Role") String role) {
         
-        log.info("Getting user by ID: {} requested by: {} (Role: {})", id, userEmail, role);
+        logger.info("Getting user by ID: {} requested by: {} (Role: {})", id, userEmail, role);
         
         Optional<User> user = userService.findById(id);
         
@@ -67,7 +67,7 @@ public class UserController {
             @RequestHeader("X-User-Id") String userId,
             @RequestHeader("X-User-Role") String role) {
         
-        log.info("Updating profile for user: {} (ID: {})", userEmail, userId);
+        logger.info("Updating profile for user: {} (ID: {})", userEmail, userId);
         
         try {
             User updatedUser = userService.updateUser(Long.parseLong(userId), userDetails);
@@ -87,7 +87,7 @@ public class UserController {
             @RequestHeader("X-User-Email") String userEmail,
             @RequestHeader("X-User-Role") String role) {
         
-        log.info("Deleting user ID: {} requested by: {} (Role: {})", id, userEmail, role);
+        logger.info("Deleting user ID: {} requested by: {} (Role: {})", id, userEmail, role);
         
         try {
             userService.deleteUser(id);
