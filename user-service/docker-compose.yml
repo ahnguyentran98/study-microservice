@@ -12,7 +12,7 @@ services:
       - user_db_data:/var/lib/postgresql/data
       - ../z-init-db/user_service_db.sql:/docker-entrypoint-initdb.d/user_service_db.sql
     networks:
-      - user-service-network
+      - microservices-network  # Changed to shared network
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U admin -d user_service_db"]
       interval: 10s
@@ -28,11 +28,11 @@ services:
       user-db:
         condition: service_healthy
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://user-db:5432/user_service_db
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://user-service-db:5432/user_service_db  # Using container name
       - SPRING_DATASOURCE_USERNAME=admin
       - SPRING_DATASOURCE_PASSWORD=password
     networks:
-      - user-service-network
+      - microservices-network  # Changed to shared network
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
@@ -45,5 +45,5 @@ volumes:
   user_db_data:
 
 networks:
-  user-service-network:
-    driver: bridge
+  microservices-network:
+    external: true  # Use external shared network
