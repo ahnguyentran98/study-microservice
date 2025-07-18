@@ -1,9 +1,19 @@
 services:
   api-gateway:
-    build: .
+    build: 
+      context: .
+      dockerfile: Dockerfile
     container_name: api-gateway-app
+    user: "1000:1000"  # Map to host user to avoid permission issues
     ports:
-      - "8888:8080"
+      - "8889:8080"
+    volumes:
+      # Mount source code for hot reload
+      - ./src:/app/src
+      - ./build.gradle:/app/build.gradle
+      - ./settings.gradle:/app/settings.gradle
+      # Mount gradle cache to speed up builds
+      - gradle-cache:/home/spring/.gradle
     environment:
       - USER_SERVICE_URL=http://user-service-app:8080  # Container name as hostname
       - PRODUCT_SERVICE_URL=http://product-service-app:8080
@@ -21,6 +31,10 @@ services:
       timeout: 10s
       retries: 3
       start_period: 60s
+
+volumes:
+  gradle-cache:
+    driver: local
 
 networks:
   microservices-network:

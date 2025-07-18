@@ -10,21 +10,19 @@ import java.util.Arrays;
 
 @Configuration
 public class CorsConfig {
+   @Bean
+   public CorsWebFilter corsWebFilter() {
+       CorsConfiguration corsConfig = new CorsConfiguration();
+       corsConfig.setAllowCredentials(true);
+       corsConfig.setAllowedOriginPatterns(Arrays.asList("*"));
+       corsConfig.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+       corsConfig.setAllowedHeaders(Arrays.asList("*"));
+       corsConfig.setExposedHeaders(Arrays.asList("Authorization", "Content-Type"));
+       corsConfig.setMaxAge(3600L);
 
-    // temporarily disabled cors configuration
-//    @Bean
-//    public CorsWebFilter corsWebFilter() {
-//        CorsConfiguration corsConfig = new CorsConfiguration();
-//        corsConfig.setAllowCredentials(true);
-//        corsConfig.setAllowedOriginPatterns(Arrays.asList("*"));
-//        corsConfig.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-//        corsConfig.setAllowedHeaders(Arrays.asList("*"));
-//        corsConfig.setExposedHeaders(Arrays.asList("Authorization", "Content-Type"));
-//        corsConfig.setMaxAge(3600L);
-//
-//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-//        source.registerCorsConfiguration("/**", corsConfig);
-//
-//        return new CorsWebFilter(source);
-//    }
+       UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+       source.registerCorsConfiguration("/**", corsConfig);
+
+       return new CorsWebFilter(source);
+   }
 }

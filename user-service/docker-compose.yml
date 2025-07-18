@@ -20,10 +20,20 @@ services:
       retries: 5
 
   user-service:
-    build: .
+    build: 
+      context: .
+      dockerfile: Dockerfile
     container_name: user-service-app
+    user: "1000:1000"  # Map to host user to avoid permission issues
     ports:
       - "8080:8080"
+    volumes:
+      # Mount source code for hot reload
+      - ./src:/app/src
+      - ./build.gradle:/app/build.gradle
+      - ./settings.gradle:/app/settings.gradle
+      # Mount gradle cache to speed up builds
+      - gradle-cache:/home/spring/.gradle
     depends_on:
       user-db:
         condition: service_healthy
@@ -43,6 +53,8 @@ services:
 
 volumes:
   user_db_data:
+  gradle-cache:
+    driver: local
 
 networks:
   microservices-network:
