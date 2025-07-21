@@ -1,0 +1,81 @@
+services:
+  product-db:
+    image: postgres:13
+    container_name: product-service-db
+    environment:
+      POSTGRES_DB: product_db
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5434:5432"
+    volumes:
+      - product_db_data:/var/lib/postgresql/data
+      - ../z-init-db/product-db.sql:/docker-entrypoint-initdb.d/product-db.sql
+    networks:
+      - microservices-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admin -d product_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  product-redis:
+    image: redis:7-alpine
+    container_name: product-service-redis
+    ports:
+      - "6380:6379"
+    volumes:
+      - product_redis_data:/data
+    networks:
+      - microservices-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  product-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: product-service-app
+    user: "1000:1000"  # Map to host user to avoid permission issues
+    ports:
+      - "8082:8082"
+    volumes:
+      # Mount source code for hot reload
+      - ./src:/app/src
+      - ./build.gradle:/app/build.gradle
+      - ./settings.gradle:/app/settings.gradle
+      # Mount gradle cache to speed up builds
+      - gradle-cache:/home/spring/.gradle
+    depends_on:
+      product-db:
+        condition: service_healthy
+      product-redis:
+        condition: service_healthy
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://product-service-db:5432/product_db
+      - SPRING_DATASOURCE_USERNAME=admin
+      - SPRING_DATASOURCE_PASSWORD=password
+      - SPRING_DATA_REDIS_HOST=product-service-redis
+      - SPRING_DATA_REDIS_PORT=6379
+    networks:
+      - microservices-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8082/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+volumes:
+  product_db_data:
+  product_redis_data:
+  gradle-cache:
+    driver: local
+
+networks:
+  microservices-network:
+    external: true  # Use external shared network

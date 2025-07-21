@@ -46,14 +46,11 @@ public class GatewayConfig {
                 .route("product-service-list", r -> r.path("/api/products")
                         .and().method(HttpMethod.GET, HttpMethod.POST)
                         .uri(productServiceUrl))
-                .route("product-service-detail", r -> r.path("/api/products/{id}")
-                        .and().method(HttpMethod.GET, HttpMethod.PUT, HttpMethod.DELETE)
-                        .uri(productServiceUrl))
                 .route("product-service-search", r -> r.path("/api/products/search")
                         .and().method(HttpMethod.POST)
                         .uri(productServiceUrl))
-                .route("product-service-inventory", r -> r.path("/api/products/{id}/inventory")
-                        .and().method(HttpMethod.PUT)
+                .route("product-service-detail", r -> r.path("/api/products/{id}")
+                        .and().method(HttpMethod.GET, HttpMethod.PUT, HttpMethod.DELETE)
                         .uri(productServiceUrl))
                 
                 // Order Service Routes

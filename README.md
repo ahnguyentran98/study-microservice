@@ -61,7 +61,7 @@ Your Machine:
 
 ### 2. **Product Service**
 - **Purpose**: Manage product catalog, inventory, search
-- **Tech Stack**: Spring Boot + Elasticsearch + PostgreSQL
+- **Tech Stack**: Spring Boot + PostgreSQL + Redis (caching)
 - **Endpoints**:
   - `GET /api/products`
   - `GET /api/products/{id}`

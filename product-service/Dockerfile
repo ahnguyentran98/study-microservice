@@ -27,9 +27,10 @@ RUN ./gradlew --version
 
 USER spring:spring
 
-EXPOSE 8080
+EXPOSE 8082
 
 # Set JVM options for containerized environment and use bootRun for hot reload
 ENTRYPOINT ["./gradlew", "bootRun", \
-    "--args=-Djava.security.egd=file:/dev/./urandom \
+    "--args=--spring.profiles.active=docker \
+    -Djava.security.egd=file:/dev/./urandom \
     -Dspring.devtools.restart.enabled=true"]
