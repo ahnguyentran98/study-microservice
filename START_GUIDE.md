@@ -151,11 +151,32 @@ docker-compose build
 
 ## Next Steps
 
-1. **Add Authentication**: Implement JWT tokens for secure API access
-2. **Add Monitoring**: Set up Prometheus/Grafana for metrics
-3. **Add Logging**: Implement centralized logging with ELK stack
-4. **Add Testing**: Write unit and integration tests
-5. **Add CI/CD**: Set up automated builds and deployments
+> 📌 **See [ENHANCEMENTS_TODO.md](ENHANCEMENTS_TODO.md) for a detailed enhancement roadmap with 13 structured learning tasks!**
+
+### Recommended Learning Path:
+1. **Health Checks** - Add actuator endpoints with dependency health indicators
+2. **Exception Handling** - Implement global error handling across all services
+3. **Input Validation** - Add Bean Validation to all DTOs
+4. **Circuit Breaker** - Add Resilience4j to handle service failures gracefully
+5. **Service Discovery** - Replace hardcoded URLs with Eureka
+
+### Additional Enhancements:
+- **Add Monitoring**: Set up Prometheus/Grafana for metrics
+- **Add Distributed Tracing**: Implement Zipkin for request tracing
+- **Add Saga Pattern**: Handle distributed transactions properly
+
+---
+
+## Related Documentation
+
+| Document | Description |
+|----------|-------------|
+| [README.md](README.md) | Project overview and architecture concepts |
+| [SERVICES_FLOW.md](SERVICES_FLOW.md) | Detailed service communication patterns |
+| [ENHANCEMENTS_TODO.md](ENHANCEMENTS_TODO.md) | **Enhancement roadmap (13 tasks)** |
+| [RUST_MIGRATION_PLAN.md](RUST_MIGRATION_PLAN.md) | **Rust migration strategy (12 weeks)** |
+
+---
 
 ## Architecture Features
 

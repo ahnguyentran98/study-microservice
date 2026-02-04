@@ -19,6 +19,7 @@ This document details the communication patterns and service flows for our e-com
 7. [Error Handling & Resilience](#error-handling--resilience)
 8. [Security & Authentication](#security--authentication)
 9. [Troubleshooting Guide](#troubleshooting-guide)
+10. [Related Documentation](#-related-documentation)
 
 ---
 
@@ -1970,72 +1971,25 @@ public class BusinessMetrics {
 
 ---
 
-## 📊 **Architecture Summary & Key Decisions**
+## 📖 **Related Documentation**
 
-### **Technology Stack (README Aligned)**
-| Component | Technology | Version | Purpose |
-|-----------|------------|---------|---------|
-| **Backend Framework** | Spring Boot | 3.2+ | Modern Java framework with Jakarta EE 9+ |
-| **Java Version** | OpenJDK | 17+ | Required for Spring Boot 3.2 |
-| **Build Tool** | Gradle | 8.5+ | Dependency management and builds |
-| **API Gateway** | Spring Cloud Gateway | Latest | Request routing and cross-cutting concerns |
-| **Frontend** | Vue.js | 3.x | Modern reactive SPA framework |
-| **State Management** | Pinia | Latest | Vue.js state management |
-| **Primary Database** | PostgreSQL | 13+ | ACID compliance and structured data |
-| **Document Database** | MongoDB | 5.0+ | Flexible schema for notifications |
-| **Cache** | Redis | 6.2+ | High-performance caching and sessions |
-| **Message Queue** | RabbitMQ | 3.x | Asynchronous event-driven communication |
-| **Search Engine** | Elasticsearch | 7.x+ | Full-text search capabilities |
-| **Containerization** | Docker | 20.x+ | Local development environment |
-| **Orchestration** | Docker Compose | 3.8 | Multi-container application management |
+| Document | Description |
+|----------|-------------|
+| [README.md](README.md) | Project overview and architecture concepts |
+| [START_GUIDE.md](START_GUIDE.md) | Quick start guide for running the project |
+| [ENHANCEMENTS_TODO.md](ENHANCEMENTS_TODO.md) | **Enhancement roadmap with 13 learning tasks** |
+| [RUST_MIGRATION_PLAN.md](RUST_MIGRATION_PLAN.md) | **Rust migration strategy (12 weeks)** |
 
-### **Port Allocation (README Specified)**
-```
-Frontend (Vue.js)     → localhost:3000
-API Gateway           → localhost:8080
-User Service         → localhost:8081
-Product Service      → localhost:8082
-Order Service        → localhost:8083
-Payment Service      → localhost:8084
-Notification Service → localhost:8085
-PostgreSQL           → localhost:5432
-MongoDB              → localhost:27017
-Redis                → localhost:6379
-RabbitMQ             → localhost:5672
-RabbitMQ Management  → localhost:15672
-```
+---
 
-### **Database Strategy (README Aligned)**
-- **User Service**: PostgreSQL (structured user data, ACID transactions)
-- **Product Service**: PostgreSQL + Elasticsearch (search optimization) + Redis (caching)
-- **Order Service**: PostgreSQL + Redis (fast lookups and caching)
-- **Payment Service**: PostgreSQL (transaction integrity and financial data)
-- **Notification Service**: MongoDB (flexible message formats and metadata)
+## 🚀 **What's Next?**
 
-### **Communication Patterns**
-1. **Frontend ↔ API Gateway**: HTTP/REST via Vue.js Axios client
-2. **API Gateway ↔ Services**: HTTP/REST with circuit breakers and load balancing
-3. **Service ↔ Service**: WebClient for synchronous HTTP calls
-4. **Service ↔ Message Queue**: RabbitMQ for asynchronous event-driven communication
-5. **Service ↔ Database**: JPA/Hibernate for PostgreSQL, Spring Data MongoDB
+This comprehensive guide shows exactly how the microservices communicate, handle data, manage failures, and can be monitored in production.
 
-### **Key Architectural Benefits**
-- **Local Development**: Complete environment runs on single machine
-- **Service Independence**: Each service can be developed, tested, and deployed separately
-- **Technology Diversity**: Different databases for different service needs
-- **Event-Driven**: Asynchronous processing with RabbitMQ for better scalability
-- **Caching Strategy**: Redis for improved performance on frequently accessed data
-- **Search Capability**: Elasticsearch for advanced product search features
-- **Modern Stack**: Spring Boot 3.2 + Java 17 + Jakarta EE for future compatibility
+> 📌 **Ready to enhance this project?** Check out [ENHANCEMENTS_TODO.md](ENHANCEMENTS_TODO.md) for structured learning tasks including:
+> - Circuit Breaker implementation
+> - Distributed Tracing with Zipkin
+> - Saga Pattern for distributed transactions
+> - And 10 more hands-on enhancements!
 
-### **Learning Path Outcomes**
-By implementing this architecture, you will master:
-- **Modern Spring Boot 3.x**: Jakarta EE migration, enhanced security, performance improvements
-- **Microservices Design**: Service decomposition, communication patterns, data management
-- **Vue.js Frontend Integration**: SPA development with modern reactive patterns
-- **Docker Orchestration**: Multi-container application development and deployment
-- **Event-Driven Architecture**: Asynchronous messaging and eventual consistency
-- **Database Management**: Multi-database strategies and data consistency patterns
-- **Monitoring & Observability**: Logging, metrics, and distributed system debugging
-
-This comprehensive guide demonstrates exactly how modern microservices communicate, handle data, manage failures, and can be monitored in production environments while providing a solid foundation for learning distributed systems architecture.
+The system demonstrates real-world patterns and practices used in modern distributed systems.

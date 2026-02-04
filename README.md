@@ -531,4 +531,36 @@ docker stats
 4. **Document everything** (API contracts, deployment procedures)
 5. **Plan for failure** (circuit breakers, retries, fallbacks)
 
+---
+
+## 📖 Documentation
+
+| Document | Description |
+|----------|-------------|
+| [README.md](README.md) | Project overview and architecture concepts |
+| [START_GUIDE.md](START_GUIDE.md) | Quick start guide for running the project |
+| [SERVICES_FLOW.md](SERVICES_FLOW.md) | Detailed service communication and patterns |
+| [ENHANCEMENTS_TODO.md](ENHANCEMENTS_TODO.md) | **Enhancement roadmap with 13 learning tasks** |
+| [RUST_MIGRATION_PLAN.md](RUST_MIGRATION_PLAN.md) | **Plan for migrating backend to Rust** |
+
+---
+
+## 🚀 Enhancement Roadmap
+
+This project includes a structured enhancement roadmap for continued learning. See **[ENHANCEMENTS_TODO.md](ENHANCEMENTS_TODO.md)** for:
+
+- ✅ **13 hands-on enhancement tasks** organized by difficulty
+- ✅ **3-tier priority system**: Essential → Core → Advanced
+- ✅ **Estimated time** and files to modify for each task
+- ✅ **8-week suggested implementation timeline**
+
+### Quick Preview of Enhancements:
+| Tier | Focus Area | Example Tasks |
+|------|------------|---------------|
+| 🟢 Tier 1 | Essential Patterns | Health Checks, Service Discovery, Circuit Breaker |
+| 🟡 Tier 2 | Core Concepts | Exception Handling, Validation, DB Separation |
+| 🔵 Tier 3 | Advanced Patterns | Saga Pattern, Event Sourcing, CQRS |
+
+---
+
 This architecture provides a solid foundation for learning microservices while building something practical!
