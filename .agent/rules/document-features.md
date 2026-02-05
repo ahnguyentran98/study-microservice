@@ -19,23 +19,73 @@ Create feature docs **BEFORE** writing any code or API docs. This is the design 
 
 ## Output Location
 
-All feature documentation goes in: `docs/feature-docs/<feature-name>.md`
+All feature documentation goes in: `docs/feature-docs/<service-folder>/<feature-name>.md`
+
+---
+
+## ⚠️ IMPORTANT: Separate Files per API Operation
+
+**DO NOT combine all CRUD operations into one file!**
+
+Each API operation (Create, Read, Update, Delete) should have its **own separate markdown file**.
+
+### ✅ CORRECT Structure (Separate Files)
+```
+docs/feature-docs/
+├── user-service/
+│   ├── create-user.md          # POST /api/v1/users
+│   ├── get-user.md             # GET /api/v1/users/{id}
+│   ├── update-user.md          # PUT /api/v1/users/{id}
+│   ├── delete-user.md          # DELETE /api/v1/users/{id}
+│   └── login-user.md           # POST /api/v1/users/login
+├── order-service/
+│   ├── create-order.md         # POST /api/v1/orders
+│   ├── get-order.md            # GET /api/v1/orders/{id}
+│   ├── get-user-orders.md      # GET /api/v1/orders/user/{userId}
+│   ├── update-order-status.md  # PUT /api/v1/orders/{id}/status
+│   └── cancel-order.md         # DELETE /api/v1/orders/{id}
+├── product-service/
+│   ├── create-product.md
+│   ├── get-product.md
+│   ├── search-products.md
+│   └── update-inventory.md
+├── payment-service/
+│   ├── process-payment.md
+│   ├── refund-payment.md
+│   └── get-payment.md
+└── notification-service/
+    ├── send-email.md
+    ├── send-sms.md
+    └── get-notification-history.md
+```
+
+### ❌ WRONG Structure (Combined Files)
+```
+docs/feature-docs/
+├── user-management.md      # ❌ DON'T combine all user APIs
+├── order-management.md     # ❌ DON'T combine all order APIs
+└── product-catalog.md      # ❌ DON'T combine all product APIs
+```
 
 ---
 
 ## Feature Doc Template
 
+Each file documents **ONE specific API endpoint**:
+
 ```markdown
-# Feature Name
+# Create User
 
 ## Purpose
-Brief description of what this feature does and why it's needed.
+Register a new user account in the system.
 
-## Services Involved
-| Service | Role |
-|---------|------|
-| user-service | Handles authentication |
-| order-service | Creates and manages orders |
+## Service
+**user-service** (Port 8081)
+
+## API Endpoint
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/api/v1/users` | Create new user |
 
 ## Flow Diagram
 
@@ -43,37 +93,40 @@ Brief description of what this feature does and why it's needed.
 sequenceDiagram
     participant F as Frontend
     participant G as API Gateway (8080)
-    participant S as Service
-    participant DB as Database
+    participant U as User Service (8081)
+    participant DB as PostgreSQL
     
-    F->>G: POST /api/v1/...
-    G->>S: Forward request
-    S->>DB: Query/Save
-    DB-->>S: Result
-    S-->>G: Response
-    G-->>F: JSON response
+    F->>G: POST /api/v1/users
+    G->>U: Forward request
+    U->>DB: INSERT user
+    DB-->>U: User created
+    U-->>G: 201 Created
+    G-->>F: User response
 ```
 
-## API Endpoints (High-Level)
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | `/api/v1/orders` | Create new order |
-| GET | `/api/v1/orders/{id}` | Get order details |
+## Request Body
+```json
+{
+  "username": "john_doe",
+  "email": "john@example.com",
+  "password": "securePassword123"
+}
+```
 
-## Data Models
-Describe key entities and DTOs involved.
-
-## Configuration
-Required `application.yml` settings or environment variables.
-
-## Dependencies
-- External services or libraries needed
-- Database schema changes
+## Response
+```json
+{
+  "id": 1,
+  "username": "john_doe",
+  "email": "john@example.com",
+  "createdAt": "2024-01-01T00:00:00Z"
+}
+```
 
 ## Acceptance Criteria
-- [ ] User can create an order
-- [ ] Order status is tracked
-- [ ] Notifications are sent
+- [ ] User can register with valid data
+- [ ] Duplicate email returns 409 Conflict
+- [ ] Password is hashed before storage
 ```
 
 ---
@@ -91,9 +144,10 @@ grep_search Query="@RabbitListener" for async flows
 ```
 
 ### Step 2: Create Feature Doc
-1. Create `docs/feature-docs/<feature-name>.md`
-2. Fill in the template sections
-3. Use mermaid diagrams for complex flows
+1. Identify the **specific API endpoint** (e.g., POST /api/v1/users)
+2. Create `docs/feature-docs/<service-folder>/<operation-name>.md`
+3. Fill in the template with ONE endpoint details
+4. Use mermaid diagrams for the flow
 
 ### Step 3: Review & Proceed
 After feature doc is complete, proceed to **API Docs** (Step 2 of workflow).
