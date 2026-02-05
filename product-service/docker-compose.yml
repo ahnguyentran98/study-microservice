@@ -60,6 +60,8 @@ services:
       - SPRING_DATASOURCE_PASSWORD=password
       - SPRING_DATA_REDIS_HOST=product-service-redis
       - SPRING_DATA_REDIS_PORT=6379
+      - CONFIG_SERVER_URL=http://config-server-app:8888
+      - EUREKA_URL=http://discovery-service-app:8761/eureka/
     networks:
       - microservices-network
     restart: unless-stopped

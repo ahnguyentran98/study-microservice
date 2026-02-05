@@ -38,9 +38,11 @@ services:
       user-db:
         condition: service_healthy
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://user-service-db:5432/user_service_db  # Using container name
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://user-service-db:5432/user_service_db
       - SPRING_DATASOURCE_USERNAME=admin
       - SPRING_DATASOURCE_PASSWORD=password
+      - CONFIG_SERVER_URL=http://config-server-app:8888
+      - EUREKA_URL=http://discovery-service-app:8761/eureka/
     networks:
       - microservices-network  # Changed to shared network
     restart: unless-stopped

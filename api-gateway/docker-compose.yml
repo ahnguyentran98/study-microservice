@@ -15,13 +15,15 @@ services:
       # Mount gradle cache to speed up builds
       - gradle-cache:/home/spring/.gradle
     environment:
-      - USER_SERVICE_URL=http://user-service-app:8080  # Container name as hostname
-      - PRODUCT_SERVICE_URL=http://product-service-app:8080
-      - ORDER_SERVICE_URL=http://order-service-app:8080
-      - PAYMENT_SERVICE_URL=http://payment-service-app:8080
-      - NOTIFICATION_SERVICE_URL=http://notification-service-app:8080
+      - USER_SERVICE_URL=http://user-service-app:8080
+      - PRODUCT_SERVICE_URL=http://product-service-app:8082
+      - ORDER_SERVICE_URL=http://order-service-app:8083
+      - PAYMENT_SERVICE_URL=http://payment-service-app:8084
+      - NOTIFICATION_SERVICE_URL=http://notification-service-app:8085
       - JWT_SECRET=mySecretKey123456789012345678901234567890
       - JWT_EXPIRATION=86400000
+      - CONFIG_SERVER_URL=http://config-server-app:8888
+      - EUREKA_URL=http://discovery-service-app:8761/eureka/
     networks:
       - microservices-network  # Same shared network
     restart: unless-stopped

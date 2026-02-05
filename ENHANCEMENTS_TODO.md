@@ -8,18 +8,18 @@
 
 | Tier | Category | Completed | Total |
 |------|----------|-----------|-------|
-| 🟢 Tier 1 | Essential Patterns | 0 | 4 |
+| 🟢 Tier 1 | Essential Patterns | 4 | 4 |
 | 🟡 Tier 2 | Core Concepts | 0 | 5 |
 | 🔵 Tier 3 | Advanced Patterns | 0 | 4 |
-| **Total** | | **0** | **13** |
+| **Total** | | **4** | **13** |
 
 ---
 
 ## 🟢 TIER 1: Essential Microservice Patterns
 > **Priority:** HIGH | **Difficulty:** Beginner-Friendly | **Impact:** Foundation for production-ready services
 
-### [ ] 1.1 Health Checks with Dependencies
-**Difficulty:** ⭐ Easy | **Estimated Time:** 1-2 hours
+### [x] 1.1 Health Checks with Dependencies ✅
+**Difficulty:** ⭐ Easy | **Estimated Time:** 1-2 hours | **Status:** COMPLETED
 
 **Current State:**
 - Services run without health indicators
@@ -41,8 +41,8 @@
 
 ---
 
-### [ ] 1.2 Centralized Configuration (Spring Cloud Config)
-**Difficulty:** ⭐⭐ Medium | **Estimated Time:** 3-4 hours
+### [x] 1.2 Centralized Configuration (Spring Cloud Config) ✅
+**Difficulty:** ⭐⭐ Medium | **Estimated Time:** 3-4 hours | **Status:** COMPLETED
 
 **Current State:**
 - Each service has its own `application.yml`
@@ -76,8 +76,8 @@ config-repo/
 
 ---
 
-### [ ] 1.3 Service Discovery (Eureka)
-**Difficulty:** ⭐⭐ Medium | **Estimated Time:** 3-4 hours
+### [x] 1.3 Service Discovery (Eureka) ✅
+**Difficulty:** ⭐⭐ Medium | **Estimated Time:** 3-4 hours | **Status:** COMPLETED
 
 **Current State:**
 - Hardcoded service URLs in code: `http://product-service:8080`
@@ -108,8 +108,8 @@ discovery-service/
 
 ---
 
-### [ ] 1.4 Circuit Breaker (Resilience4j)
-**Difficulty:** ⭐⭐ Medium | **Estimated Time:** 2-3 hours
+### [x] 1.4 Circuit Breaker (Resilience4j) ✅
+**Difficulty:** ⭐⭐ Medium | **Estimated Time:** 2-3 hours | **Status:** COMPLETED
 
 **Current State:**
 - `OrderService` makes synchronous calls to `ProductService`

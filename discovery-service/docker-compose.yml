@@ -1,0 +1,21 @@
+services:
+  discovery-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: discovery-service-app
+    ports:
+      - "8761:8761"
+    networks:
+      - microservices-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8761/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+
+networks:
+  microservices-network:
+    external: true
