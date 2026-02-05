@@ -32,6 +32,64 @@ find_by_name Pattern="*Service.java" or "*Repository.java"
 
 ---
 
+## ⚠️ MANDATORY: Investigate & Plan Before Coding
+
+**NEVER start coding immediately.** Always follow this investigation flow:
+
+### Step 1: Investigate Existing Code
+```bash
+# Find related files in the target service
+find_by_name Pattern="*<Feature>*" in <service>/src/main/java
+
+# Search for similar implementations
+grep_search Query="<keyword>" in <service>/src/main/java
+
+# Check existing entities, DTOs, controllers
+view_file_outline <service>/src/main/java/.../entity/
+view_file_outline <service>/src/main/java/.../controller/
+```
+
+### Step 2: Understand Dependencies
+```bash
+# Check inter-service calls
+grep_search Query="WebClient" in <service>/src/main/java
+
+# Check message handlers
+grep_search Query="@RabbitListener" in <service>/src/main/java
+
+# Check existing configurations
+view_file <service>/src/main/resources/application.yml
+```
+
+### Step 3: Create Implementation Plan
+Before writing any code, document your plan:
+
+1. **What files to create/modify?**
+   - New entities, DTOs, controllers, services, repositories
+
+2. **What dependencies are needed?**
+   - External services, libraries, database changes
+
+3. **What is the order of implementation?**
+   - Entity → Repository → Service → Controller → Config
+
+4. **What could go wrong?**
+   - Identify potential issues and edge cases
+
+### Step 4: Implement in Order
+Follow this standard implementation order:
+```
+1. Entity/Model classes
+2. Repository interfaces
+3. DTO classes (Request/Response)
+4. Service layer (business logic)
+5. Controller layer (REST endpoints)
+6. Configuration (if needed)
+7. Tests
+```
+
+---
+
 ## Rule 1: Naming Conventions (Java/camelCase)
 
 ### Variables & Methods
