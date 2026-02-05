@@ -155,16 +155,18 @@ After API docs are complete, proceed to **Implementation** (Step 3 of workflow).
 
 ---
 
-## Service Reference
+## Available Services
 
-| Service | Port | Base Path |
-|---------|------|-----------|
-| API Gateway | 8080 | `http://localhost:8080` |
-| User Service | 8081 | `/api/users` or `/api/v1/users` |
-| Product Service | 8082 | `/api/products` or `/api/v1/products` |
-| Order Service | 8083 | `/api/orders` or `/api/v1/orders` |
-| Payment Service | 8084 | `/api/payments` or `/api/v1/payments` |
-| Notification Service | 8085 | `/api/notifications` or `/api/v1/notifications` |
+| Service | Path | Port | Base URL |
+|---------|------|------|----------|
+| api-gateway | `api-gateway/` | 8080 | `http://localhost:8080` |
+| config-server | `config-server/` | 8888 | `http://localhost:8888` |
+| discovery-service | `discovery-service/` | 8761 | `http://localhost:8761` |
+| user-service | `user-service/` | 8081 | `/api/users` or `/api/v1/users` |
+| product-service | `product-service/` | 8082 | `/api/products` or `/api/v1/products` |
+| order-service | `order-service/` | 8083 | `/api/orders` or `/api/v1/orders` |
+| payment-service | `payment-service/` | 8084 | `/api/payments` or `/api/v1/payments` |
+| notification-service | `notification-service/` | 8085 | `/api/notifications` or `/api/v1/notifications` |
 
 ## Authentication
 - JWT Bearer tokens from User Service login
@@ -182,3 +184,4 @@ After API docs are complete, proceed to **Implementation** (Step 3 of workflow).
 5. **Add descriptions** to each request
 6. **Include example responses** for testing reference
 ---
+

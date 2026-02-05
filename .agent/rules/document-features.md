@@ -142,4 +142,20 @@ graph LR
 | Databases | PostgreSQL, MongoDB, Redis |
 | Messaging | RabbitMQ |
 | Ports | Gateway 8080, User 8081, Product 8082, Order 8083, Payment 8084, Notification 8085 |
+
 ---
+
+## Available Services
+
+| Service | Path | Port | Description |
+|---------|------|------|-------------|
+| api-gateway | `api-gateway/` | 8080 | Spring Cloud Gateway, routes all requests |
+| config-server | `config-server/` | 8888 | Spring Cloud Config Server |
+| discovery-service | `discovery-service/` | 8761 | Eureka Service Discovery |
+| user-service | `user-service/` | 8081 | User auth & profiles (PostgreSQL) |
+| product-service | `product-service/` | 8082 | Product catalog (PostgreSQL + Redis) |
+| order-service | `order-service/` | 8083 | Order management (PostgreSQL + RabbitMQ) |
+| payment-service | `payment-service/` | 8084 | Payment processing (PostgreSQL) |
+| notification-service | `notification-service/` | 8085 | Notifications (MongoDB + RabbitMQ) |
+---
+
