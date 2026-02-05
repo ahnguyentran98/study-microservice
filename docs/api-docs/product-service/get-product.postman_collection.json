@@ -1,0 +1,43 @@
+{
+  "info": {
+    "name": "Get Product by ID API",
+    "description": "Get single product by ID",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Get Product by ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/products/1",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "products", "1"]
+        },
+        "description": "Get single product by ID"
+      },
+      "response": [
+        {
+          "name": "Success",
+          "status": "OK",
+          "code": 200,
+          "body": "{\n  \"id\": 1,\n  \"name\": \"Wireless Headphones\",\n  \"description\": \"High-quality bluetooth headphones\",\n  \"price\": 99.99,\n  \"stock\": 50,\n  \"category\": \"Electronics\",\n  \"imageUrl\": \"https://example.com/headphones.jpg\",\n  \"active\": true,\n  \"createdAt\": \"2026-02-05T10:00:00Z\",\n  \"updatedAt\": \"2026-02-05T10:00:00Z\"\n}"
+        },
+        {
+          "name": "Not Found",
+          "status": "Not Found",
+          "code": 404,
+          "body": "{\n  \"error\": \"Product not found\"\n}"
+        }
+      ]
+    }
+  ]
+}

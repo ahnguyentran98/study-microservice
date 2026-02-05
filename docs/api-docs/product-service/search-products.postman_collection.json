@@ -1,0 +1,46 @@
+{
+  "info": {
+    "name": "Search Products API",
+    "description": "Search products by name",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Search Products",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"query\": \"laptop\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/products/search",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "products", "search"]
+        },
+        "description": "Search products by name"
+      },
+      "response": [
+        {
+          "name": "Success",
+          "status": "OK",
+          "code": 200,
+          "body": "[\n  {\n    \"id\": 1,\n    \"name\": \"Gaming Laptop\",\n    \"description\": \"High-performance gaming laptop\",\n    \"price\": 1299.99,\n    \"stock\": 10,\n    \"category\": \"Computers\",\n    \"active\": true\n  },\n  {\n    \"id\": 2,\n    \"name\": \"Business Laptop\",\n    \"description\": \"Professional business laptop\",\n    \"price\": 899.99,\n    \"stock\": 25,\n    \"category\": \"Computers\",\n    \"active\": true\n  }\n]"
+        }
+      ]
+    }
+  ]
+}

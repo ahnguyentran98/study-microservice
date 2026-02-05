@@ -1,0 +1,61 @@
+{
+  "info": {
+    "name": "Update Order Status API",
+    "description": "Update order status (admin only)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080",
+      "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Update Order Status",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"status\": \"SHIPPED\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/orders/1/status",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "orders", "1", "status"]
+        },
+        "description": "Update order status (admin only)"
+      },
+      "response": [
+        {
+          "name": "Success",
+          "status": "OK",
+          "code": 200,
+          "body": "{\n  \"id\": 1,\n  \"status\": \"SHIPPED\",\n  \"updatedAt\": \"2026-02-05T12:00:00Z\"\n}"
+        },
+        {
+          "name": "Invalid Transition",
+          "status": "Bad Request",
+          "code": 400,
+          "body": "{\n  \"error\": \"Invalid status transition from DELIVERED to SHIPPED\"\n}"
+        }
+      ]
+    }
+  ]
+}

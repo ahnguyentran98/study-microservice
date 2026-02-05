@@ -1,0 +1,47 @@
+{
+  "info": {
+    "name": "Get User Orders API",
+    "description": "Get order history for a user",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080",
+      "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Get User Orders",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/orders/user/1",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "orders", "user", "1"]
+        },
+        "description": "Get order history for a user"
+      },
+      "response": [
+        {
+          "name": "Success",
+          "status": "OK",
+          "code": 200,
+          "body": "[\n  {\n    \"id\": 1,\n    \"userId\": 1,\n    \"status\": \"DELIVERED\",\n    \"totalAmount\": 299.97,\n    \"itemCount\": 3,\n    \"createdAt\": \"2026-01-15T10:00:00Z\"\n  },\n  {\n    \"id\": 2,\n    \"userId\": 1,\n    \"status\": \"PAID\",\n    \"totalAmount\": 149.99,\n    \"itemCount\": 1,\n    \"createdAt\": \"2026-02-01T14:30:00Z\"\n  }\n]"
+        }
+      ]
+    }
+  ]
+}

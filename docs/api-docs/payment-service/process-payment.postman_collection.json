@@ -1,0 +1,67 @@
+{
+  "info": {
+    "name": "Process Payment API",
+    "description": "Process payment for an order (direct API call)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080",
+      "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Process Payment",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"orderId\": 123,\n  \"userId\": 456,\n  \"amount\": 99.99,\n  \"paymentMethodId\": \"pm_card_visa\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/payments/process",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "payments", "process"]
+        },
+        "description": "Process payment for an order (direct API call)"
+      },
+      "response": [
+        {
+          "name": "Success",
+          "status": "OK",
+          "code": 200,
+          "body": "{\n  \"id\": 789,\n  \"orderId\": 123,\n  \"amount\": 99.99,\n  \"currency\": \"USD\",\n  \"status\": \"SUCCESS\",\n  \"transactionId\": \"ch_xxx\",\n  \"createdAt\": \"2026-02-05T10:01:00Z\"\n}"
+        },
+        {
+          "name": "Payment Declined",
+          "status": "Payment Required",
+          "code": 402,
+          "body": "{\n  \"error\": \"Card declined\"\n}"
+        },
+        {
+          "name": "Duplicate Payment",
+          "status": "Conflict",
+          "code": 409,
+          "body": "{\n  \"error\": \"Payment already processed for this order\"\n}"
+        }
+      ]
+    }
+  ]
+}

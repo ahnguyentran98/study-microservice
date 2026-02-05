@@ -1,0 +1,53 @@
+{
+  "info": {
+    "name": "Delete User API",
+    "description": "Delete user (self or admin only)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080",
+      "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Delete User",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/users/1",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "users", "1"]
+        },
+        "description": "Delete user (self or admin only)"
+      },
+      "response": [
+        {
+          "name": "Success",
+          "status": "No Content",
+          "code": 204,
+          "body": ""
+        },
+        {
+          "name": "Not Found",
+          "status": "Not Found",
+          "code": 404,
+          "body": "{\n  \"error\": \"User not found\"\n}"
+        }
+      ]
+    }
+  ]
+}

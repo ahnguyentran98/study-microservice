@@ -1,0 +1,47 @@
+{
+  "info": {
+    "name": "Get Payment History API",
+    "description": "Get payment history for a user",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080",
+      "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Get Payment History",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/payments/history/456",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "payments", "history", "456"]
+        },
+        "description": "Get payment history for a user"
+      },
+      "response": [
+        {
+          "name": "Success",
+          "status": "OK",
+          "code": 200,
+          "body": "[\n  {\n    \"id\": 789,\n    \"orderId\": 123,\n    \"amount\": 99.99,\n    \"currency\": \"USD\",\n    \"status\": \"SUCCESS\",\n    \"createdAt\": \"2026-02-05T10:01:00Z\"\n  },\n  {\n    \"id\": 790,\n    \"orderId\": 124,\n    \"amount\": 149.99,\n    \"currency\": \"USD\",\n    \"status\": \"REFUNDED\",\n    \"createdAt\": \"2026-02-04T15:30:00Z\"\n  }\n]"
+        }
+      ]
+    }
+  ]
+}

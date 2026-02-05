@@ -1,0 +1,43 @@
+{
+  "info": {
+    "name": "Get All Products API",
+    "description": "Get all products with pagination and sorting",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Get All Products",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/products?page=0&size=20&sortBy=name&sortDir=asc",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "products"],
+          "query": [
+            { "key": "page", "value": "0" },
+            { "key": "size", "value": "20" },
+            { "key": "sortBy", "value": "name" },
+            { "key": "sortDir", "value": "asc" }
+          ]
+        },
+        "description": "Get all products with pagination and sorting"
+      },
+      "response": [
+        {
+          "name": "Success",
+          "status": "OK",
+          "code": 200,
+          "body": "{\n  \"content\": [\n    {\n      \"id\": 1,\n      \"name\": \"Wireless Headphones\",\n      \"description\": \"High-quality bluetooth headphones\",\n      \"price\": 99.99,\n      \"stock\": 50,\n      \"category\": \"Electronics\",\n      \"active\": true,\n      \"createdAt\": \"2026-02-05T10:00:00Z\"\n    }\n  ],\n  \"totalElements\": 100,\n  \"totalPages\": 5,\n  \"size\": 20,\n  \"number\": 0\n}"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "info": {
+    "name": "Refund Payment API",
+    "description": "Process a refund (admin only)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080",
+      "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Refund Payment",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"paymentId\": 789,\n  \"amount\": 50.00,\n  \"reason\": \"Customer requested refund\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/payments/refund",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "payments", "refund"]
+        },
+        "description": "Process a refund (admin only)"
+      },
+      "response": [
+        {
+          "name": "Success",
+          "status": "OK",
+          "code": 200,
+          "body": "{\n  \"id\": 1,\n  \"paymentId\": 789,\n  \"amount\": 50.00,\n  \"reason\": \"Customer requested refund\",\n  \"status\": \"SUCCESS\",\n  \"refundTransactionId\": \"re_xxx\",\n  \"createdAt\": \"2026-02-05T12:00:00Z\"\n}"
+        },
+        {
+          "name": "Already Refunded",
+          "status": "Conflict",
+          "code": 409,
+          "body": "{\n  \"error\": \"Payment already refunded\"\n}"
+        }
+      ]
+    }
+  ]
+}

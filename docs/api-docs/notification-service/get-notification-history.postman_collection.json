@@ -1,0 +1,47 @@
+{
+  "info": {
+    "name": "Get Notification History API",
+    "description": "Get notification history for a user",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080",
+      "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Get Notification History",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/notifications/456/history",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "notifications", "456", "history"]
+        },
+        "description": "Get notification history for a user"
+      },
+      "response": [
+        {
+          "name": "Success",
+          "status": "OK",
+          "code": 200,
+          "body": "[\n  {\n    \"id\": \"65abc123def456\",\n    \"type\": \"EMAIL\",\n    \"subject\": \"Order Confirmation\",\n    \"status\": \"DELIVERED\",\n    \"createdAt\": \"2026-02-05T10:00:00Z\",\n    \"readAt\": null\n  },\n  {\n    \"id\": \"65abc123def789\",\n    \"type\": \"SMS\",\n    \"subject\": \"Shipping Update\",\n    \"status\": \"SENT\",\n    \"createdAt\": \"2026-02-04T15:30:00Z\",\n    \"readAt\": \"2026-02-04T16:00:00Z\"\n  }\n]"
+        }
+      ]
+    }
+  ]
+}

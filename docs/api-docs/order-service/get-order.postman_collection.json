@@ -1,0 +1,53 @@
+{
+  "info": {
+    "name": "Get Order by ID API",
+    "description": "Get order details by ID",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080",
+      "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Get Order by ID",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/orders/1",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "orders", "1"]
+        },
+        "description": "Get order details by ID"
+      },
+      "response": [
+        {
+          "name": "Success",
+          "status": "OK",
+          "code": 200,
+          "body": "{\n  \"id\": 1,\n  \"userId\": 1,\n  \"status\": \"PAID\",\n  \"totalAmount\": 299.97,\n  \"items\": [\n    {\n      \"productId\": 101,\n      \"productName\": \"Wireless Headphones\",\n      \"quantity\": 2,\n      \"unitPrice\": 99.99,\n      \"subtotal\": 199.98\n    }\n  ],\n  \"shippingAddress\": \"123 Main St, City, State 12345\",\n  \"createdAt\": \"2026-02-05T10:00:00Z\"\n}"
+        },
+        {
+          "name": "Not Found",
+          "status": "Not Found",
+          "code": 404,
+          "body": "{\n  \"error\": \"Order not found\"\n}"
+        }
+      ]
+    }
+  ]
+}

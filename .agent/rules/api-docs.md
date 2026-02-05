@@ -24,6 +24,50 @@ Create Postman collections **AFTER** feature docs are complete and **BEFORE** im
 
 ---
 
+## ⚠️ IMPORTANT: Organize by Service Folder
+
+**Place Postman collections inside service folders!**
+
+### ✅ CORRECT Structure (Service Folders)
+```
+docs/api-docs/
+├── user-service/
+│   ├── create-user.postman_collection.json
+│   ├── get-user.postman_collection.json
+│   ├── update-user.postman_collection.json
+│   ├── delete-user.postman_collection.json
+│   └── login-user.postman_collection.json
+├── order-service/
+│   ├── create-order.postman_collection.json
+│   ├── get-order.postman_collection.json
+│   ├── update-order-status.postman_collection.json
+│   └── cancel-order.postman_collection.json
+├── product-service/
+│   ├── create-product.postman_collection.json
+│   ├── get-product.postman_collection.json
+│   ├── search-products.postman_collection.json
+│   └── update-inventory.postman_collection.json
+├── payment-service/
+│   ├── process-payment.postman_collection.json
+│   ├── refund-payment.postman_collection.json
+│   └── get-payment.postman_collection.json
+└── notification-service/
+    ├── send-email.postman_collection.json
+    ├── send-sms.postman_collection.json
+    └── get-notification-history.postman_collection.json
+```
+
+### ❌ WRONG Structure (Flat, No Service Folders)
+```
+docs/api-docs/
+├── user-service.postman_collection.json       # ❌ Not in folder
+├── order-service.postman_collection.json      # ❌ Combined all APIs
+├── product-service.postman_collection.json    # ❌ Should be separated
+└── payment-service.postman_collection.json    # ❌ Wrong location
+```
+
+---
+
 ## Postman Collection Structure
 
 ```json
@@ -105,7 +149,7 @@ Extract:
 - Authentication requirements
 
 ### Step 2: Create Postman Collection
-1. Create `docs/api-docs/<feature-name>.postman_collection.json`
+1. Create `docs/api-docs/<service-folder>/<feature-name>.postman_collection.json`
 2. Define collection variables (`baseUrl`, `token`)
 3. Add each endpoint with:
    - Method & URL

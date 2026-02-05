@@ -1,0 +1,53 @@
+{
+  "info": {
+    "name": "Cancel Order API",
+    "description": "Cancel an order (restores inventory)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080",
+      "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Cancel Order",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/orders/1",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "orders", "1"]
+        },
+        "description": "Cancel an order (restores inventory)"
+      },
+      "response": [
+        {
+          "name": "Success",
+          "status": "No Content",
+          "code": 204,
+          "body": ""
+        },
+        {
+          "name": "Cannot Cancel",
+          "status": "Bad Request",
+          "code": 400,
+          "body": "{\n  \"error\": \"Cannot cancel order that is already shipped\"\n}"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "info": {
+    "name": "Update Product API",
+    "description": "Update an existing product",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080",
+      "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Update Product",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Updated Headphones\",\n  \"description\": \"Updated description\",\n  \"price\": 89.99,\n  \"stock\": 100,\n  \"category\": \"Electronics\",\n  \"imageUrl\": \"https://example.com/new-headphones.jpg\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/products/1",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "products", "1"]
+        },
+        "description": "Update an existing product"
+      },
+      "response": [
+        {
+          "name": "Success",
+          "status": "OK",
+          "code": 200,
+          "body": "{\n  \"id\": 1,\n  \"name\": \"Updated Headphones\",\n  \"description\": \"Updated description\",\n  \"price\": 89.99,\n  \"stock\": 100,\n  \"category\": \"Electronics\",\n  \"imageUrl\": \"https://example.com/new-headphones.jpg\",\n  \"active\": true,\n  \"createdAt\": \"2026-02-05T10:00:00Z\",\n  \"updatedAt\": \"2026-02-05T12:00:00Z\"\n}"
+        }
+      ]
+    }
+  ]
+}

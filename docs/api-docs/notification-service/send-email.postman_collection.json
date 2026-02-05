@@ -1,0 +1,61 @@
+{
+  "info": {
+    "name": "Send Email API",
+    "description": "Send an email notification directly",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080",
+      "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Send Email",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"userId\": 456,\n  \"to\": \"user@example.com\",\n  \"subject\": \"Order Confirmation\",\n  \"body\": \"<h1>Your order has been confirmed</h1>\",\n  \"isHtml\": true\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/notifications/email",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "notifications", "email"]
+        },
+        "description": "Send an email notification directly"
+      },
+      "response": [
+        {
+          "name": "Success",
+          "status": "OK",
+          "code": 200,
+          "body": "{\n  \"id\": \"65abc123def456\",\n  \"type\": \"EMAIL\",\n  \"status\": \"SENT\",\n  \"createdAt\": \"2026-02-05T10:00:00Z\"\n}"
+        },
+        {
+          "name": "Delivery Failed",
+          "status": "Internal Server Error",
+          "code": 500,
+          "body": "{\n  \"error\": \"Email delivery failed\"\n}"
+        }
+      ]
+    }
+  ]
+}

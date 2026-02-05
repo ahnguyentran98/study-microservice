@@ -1,0 +1,61 @@
+{
+  "info": {
+    "name": "Create Product API",
+    "description": "Create a new product",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080",
+      "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Create Product",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Wireless Headphones\",\n  \"description\": \"High-quality bluetooth headphones\",\n  \"price\": 99.99,\n  \"stock\": 50,\n  \"category\": \"Electronics\",\n  \"imageUrl\": \"https://example.com/headphones.jpg\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/products",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "products"]
+        },
+        "description": "Create a new product"
+      },
+      "response": [
+        {
+          "name": "Created",
+          "status": "Created",
+          "code": 201,
+          "body": "{\n  \"id\": 1,\n  \"name\": \"Wireless Headphones\",\n  \"description\": \"High-quality bluetooth headphones\",\n  \"price\": 99.99,\n  \"stock\": 50,\n  \"category\": \"Electronics\",\n  \"imageUrl\": \"https://example.com/headphones.jpg\",\n  \"active\": true,\n  \"createdAt\": \"2026-02-05T10:00:00Z\",\n  \"updatedAt\": \"2026-02-05T10:00:00Z\"\n}"
+        },
+        {
+          "name": "Validation Error",
+          "status": "Bad Request",
+          "code": 400,
+          "body": "{\n  \"error\": \"Name is required\"\n}"
+        }
+      ]
+    }
+  ]
+}

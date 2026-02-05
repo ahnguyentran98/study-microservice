@@ -1,0 +1,55 @@
+{
+  "info": {
+    "name": "Send SMS API",
+    "description": "Send an SMS notification directly",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080",
+      "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Send SMS",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"userId\": 456,\n  \"phoneNumber\": \"+1234567890\",\n  \"message\": \"Your order has shipped! Tracking: TRK123\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/notifications/sms",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "notifications", "sms"]
+        },
+        "description": "Send an SMS notification directly"
+      },
+      "response": [
+        {
+          "name": "Success",
+          "status": "OK",
+          "code": 200,
+          "body": "{\n  \"id\": \"65abc123def789\",\n  \"type\": \"SMS\",\n  \"status\": \"SENT\",\n  \"createdAt\": \"2026-02-05T10:00:00Z\"\n}"
+        }
+      ]
+    }
+  ]
+}

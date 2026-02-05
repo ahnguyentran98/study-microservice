@@ -1,0 +1,47 @@
+{
+  "info": {
+    "name": "Mark Notification Read API",
+    "description": "Mark a notification as read",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080",
+      "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Mark Notification Read",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/notifications/65abc123def456/read",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "notifications", "65abc123def456", "read"]
+        },
+        "description": "Mark a notification as read"
+      },
+      "response": [
+        {
+          "name": "Success",
+          "status": "OK",
+          "code": 200,
+          "body": "{\n  \"id\": \"65abc123def456\",\n  \"status\": \"READ\",\n  \"readAt\": \"2026-02-05T12:00:00Z\"\n}"
+        }
+      ]
+    }
+  ]
+}
