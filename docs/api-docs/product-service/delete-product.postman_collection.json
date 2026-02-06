@@ -28,7 +28,7 @@
           }
         ],
         "url": {
-          "raw": "{{baseUrl}}/api/products/1",
+          "raw": "{{baseUrl}}/api/v1/products/1",
           "host": ["{{baseUrl}}"],
           "path": ["api", "products", "1"]
         },

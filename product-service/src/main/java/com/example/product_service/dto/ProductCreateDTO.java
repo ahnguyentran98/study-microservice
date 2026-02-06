@@ -17,8 +17,10 @@ import java.math.BigDecimal;
 public class ProductCreateDTO {
 
     @NotBlank(message = "Product name is required")
+    @Size(max = 255)
     private String name;
 
+    @Size(max = 2000)
     private String description;
 
     @NotNull(message = "Price is required")

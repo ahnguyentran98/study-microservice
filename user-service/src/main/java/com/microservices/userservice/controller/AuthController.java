@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/api/v1/users")
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class AuthController {
     
@@ -41,14 +41,8 @@ public class AuthController {
     public ResponseEntity<?> registerUser(@Valid @RequestBody UserRegistrationRequest registrationRequest) {
         logger.info("Registration request received for email: {}", registrationRequest.getEmail());
         
-        try {
-            User user = userService.registerUser(registrationRequest);
-            
-            return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
-        } catch (Exception e) {
-            logger.error("Registration failed: {}", e.getMessage());
-            return ResponseEntity.badRequest().body(new MessageResponse("Error: " + e.getMessage()));
-        }
+        User user = userService.registerUser(registrationRequest);
+        return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
     
     @PostMapping("/login")

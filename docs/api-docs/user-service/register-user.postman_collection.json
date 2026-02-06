@@ -27,7 +27,7 @@
           "raw": "{\n  \"email\": \"john@example.com\",\n  \"password\": \"securePassword123\",\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\",\n  \"phone\": \"+1234567890\",\n  \"address\": \"123 Main St\"\n}"
         },
         "url": {
-          "raw": "{{baseUrl}}/api/users/register",
+          "raw": "{{baseUrl}}/api/v1/users/register",
           "host": ["{{baseUrl}}"],
           "path": ["api", "users", "register"]
         },

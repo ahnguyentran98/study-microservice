@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/api/v1/users")
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class UserController {
     
@@ -69,16 +69,11 @@ public class UserController {
         
         logger.info("Updating profile for user: {} (ID: {})", userEmail, userId);
         
-        try {
-            User updatedUser = userService.updateUser(Long.parseLong(userId), userDetails);
-            updatedUser.setPassword(null); // Don't expose password
-            
-            logger.info("User profile updated for ID: {}", userId);
-            return ResponseEntity.ok(updatedUser);
-        } catch (Exception e) {
-            logger.error("Failed to update user profile: {}", e.getMessage());
-            return ResponseEntity.badRequest().body(new AuthController.MessageResponse("Error: " + e.getMessage()));
-        }
+        User updatedUser = userService.updateUser(Long.parseLong(userId), userDetails);
+        updatedUser.setPassword(null); // Don't expose password
+        
+        logger.info("User profile updated for ID: {}", userId);
+        return ResponseEntity.ok(updatedUser);
     }
     
     @DeleteMapping("/{id}")
@@ -89,12 +84,7 @@ public class UserController {
         
         logger.info("Deleting user ID: {} requested by: {} (Role: {})", id, userEmail, role);
         
-        try {
-            userService.deleteUser(id);
-            return ResponseEntity.ok(new AuthController.MessageResponse("User deleted successfully!"));
-        } catch (Exception e) {
-            logger.error("Failed to delete user: {}", e.getMessage());
-            return ResponseEntity.badRequest().body(new AuthController.MessageResponse("Error: " + e.getMessage()));
-        }
+        userService.deleteUser(id);
+        return ResponseEntity.ok(new AuthController.MessageResponse("User deleted successfully!"));
     }
 }

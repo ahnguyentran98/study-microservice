@@ -9,9 +9,9 @@
 | Tier | Category | Completed | Total |
 |------|----------|-----------|-------|
 | 🟢 Tier 1 | Essential Patterns | 4 | 4 |
-| 🟡 Tier 2 | Core Concepts | 0 | 5 |
+| 🟡 Tier 2 | Core Concepts | 5 | 5 |
 | 🔵 Tier 3 | Advanced Patterns | 0 | 4 |
-| **Total** | | **4** | **13** |
+| **Total** | | **9** | **13** |
 
 ---
 
@@ -151,148 +151,108 @@ public Map<String, Object> getProductFallback(Long productId, Exception e) {
 ## 🟡 TIER 2: Core Concepts Enhancement
 > **Priority:** MEDIUM | **Difficulty:** Intermediate | **Impact:** Better code quality and maintainability
 
-### [ ] 2.1 Global Exception Handling
-**Difficulty:** ⭐⭐ Medium | **Estimated Time:** 2-3 hours
+### [x] 2.1 Global Exception Handling ✅
+**Difficulty:** ⭐⭐ Medium | **Estimated Time:** 2-3 hours | **Status:** COMPLETED
 
 **Current State:**
-- No centralized error handling
-- Raw exceptions returned to clients
-- Inconsistent error response formats
+- ~~No centralized error handling~~ → GlobalExceptionHandler with @RestControllerAdvice
+- ~~Raw exceptions returned to clients~~ → Standardized ErrorResponse DTO
+- ~~Inconsistent error response formats~~ → Same shape across user-service & product-service
 
 **What to Do:**
-- [ ] Create custom exceptions: `ResourceNotFoundException`, `BusinessException`, `ValidationException`
-- [ ] Create `GlobalExceptionHandler` with `@RestControllerAdvice`
-- [ ] Create standardized `ErrorResponse` DTO
-- [ ] Apply to all services
+- [x] Create custom exceptions: `ResourceNotFoundException`, `BusinessException`
+- [x] Create `GlobalExceptionHandler` with `@RestControllerAdvice`
+- [x] Create standardized `ErrorResponse` DTO (with correlationId, fieldErrors for validation)
+- [x] Apply to user-service and product-service
 
-**New Files to Create (per service):**
+**New Files Created (per service):**
 ```
-src/main/java/com/microservices/{service}/exception/
+src/main/java/.../exception/
 ├── GlobalExceptionHandler.java
 ├── ResourceNotFoundException.java
 ├── BusinessException.java
-├── ValidationException.java
 └── ErrorResponse.java
 ```
 
 ---
 
-### [ ] 2.2 Request Correlation/Tracing IDs
-**Difficulty:** ⭐⭐ Medium | **Estimated Time:** 2-3 hours
+### [x] 2.2 Request Correlation/Tracing IDs ✅
+**Difficulty:** ⭐⭐ Medium | **Estimated Time:** 2-3 hours | **Status:** COMPLETED
 
 **Current State:**
-- No way to trace requests across services
-- Difficult to debug issues in distributed calls
+- ~~No way to trace requests across services~~ → X-Correlation-ID propagated
+- API Gateway generates/forwards correlation ID; services use CorrelationIdFilter + MDC
 
 **What to Do:**
-- [ ] Add MDC (Mapped Diagnostic Context) filter
-- [ ] Generate correlation ID if not present in request header
-- [ ] Pass correlation ID in all service-to-service calls
-- [ ] Include correlation ID in all log messages
-- [ ] Return correlation ID in API responses
+- [x] Add MDC filter (CorrelationIdFilter) in user-service and product-service
+- [x] Generate correlation ID if not present (X-Correlation-ID header)
+- [x] Pass correlation ID in gateway→service calls (LoggingGlobalFilter forwards header)
+- [x] Include correlation ID in log pattern (logging.pattern.console with %X{correlationId})
+- [x] Return correlation ID in ErrorResponse when present
 
-**Files to Create:**
+**Files Created:**
 ```
-src/main/java/com/microservices/{service}/filter/
-├── CorrelationIdFilter.java
-└── WebClientCorrelationInterceptor.java
-```
-
----
-
-### [ ] 2.3 API Versioning
-**Difficulty:** ⭐ Easy | **Estimated Time:** 1-2 hours
-
-**Current State:**
-- APIs use `/api/users/**`, `/api/products/**`
-- No version management strategy
-
-**What to Do:**
-- [ ] Update all endpoints to use `/api/v1/` prefix
-- [ ] Update API Gateway routes
-- [ ] Update frontend API client base URLs
-- [ ] Document versioning strategy
-
-**Files to Modify:**
-- All `*Controller.java` files - Update `@RequestMapping`
-- `api-gateway/.../config/GatewayConfig.java`
-- `frontend/src/services/apiClient.js`
-
----
-
-### [ ] 2.4 Input Validation (Bean Validation)
-**Difficulty:** ⭐ Easy | **Estimated Time:** 1-2 hours
-
-**Current State:**
-- DTOs lack validation annotations
-- Invalid input can cause database errors
-
-**What to Do:**
-- [ ] Add `@Valid` to controller method parameters
-- [ ] Add validation annotations to DTOs (`@NotNull`, `@Email`, `@Size`, etc.)
-- [ ] Handle `MethodArgumentNotValidException` in GlobalExceptionHandler
-- [ ] Return user-friendly validation error messages
-
-**Files to Modify:**
-- All `*Request.java` DTOs
-- All `*Controller.java` files
-- `GlobalExceptionHandler.java`
-
-**Example:**
-```java
-public class UserRegistrationRequest {
-    @NotBlank(message = "Username is required")
-    @Size(min = 3, max = 50, message = "Username must be 3-50 characters")
-    private String username;
-    
-    @NotBlank(message = "Email is required")
-    @Email(message = "Invalid email format")
-    private String email;
-    
-    @NotBlank(message = "Password is required")
-    @Size(min = 8, message = "Password must be at least 8 characters")
-    private String password;
-}
+user-service/.../filter/CorrelationIdFilter.java
+product-service/.../filter/CorrelationIdFilter.java
+api-gateway LoggingGlobalFilter updated to use X-Correlation-ID
 ```
 
 ---
 
-### [ ] 2.5 Database Per Service (True Separation)
-**Difficulty:** ⭐⭐ Medium | **Estimated Time:** 2-3 hours
+### [x] 2.3 API Versioning ✅
+**Difficulty:** ⭐ Easy | **Estimated Time:** 1-2 hours | **Status:** COMPLETED
 
 **Current State:**
-- All services share `microservices_db` database
-- Not true database-per-service pattern
+- ~~APIs use `/api/users/**`~~ → All use `/api/v1/users/**`, `/api/v1/products/**`, etc.
+- Version prefix applied at gateway and in each service controller
 
 **What to Do:**
-- [ ] Create separate PostgreSQL instances or schemas
-- [ ] Update `docker-compose.yml` with separate database services
-- [ ] Update each service's datasource configuration
-- [ ] Create initialization scripts per database
+- [x] Update all endpoints to use `/api/v1/` prefix (user-service, product-service controllers)
+- [x] Update API Gateway routes (GatewayConfig) and JWT filter paths
+- [ ] Update frontend API client base URLs when frontend exists
+- [ ] Document versioning strategy (optional)
 
-**Updated docker-compose.yml structure:**
-```yaml
-services:
-  postgres-user:
-    image: postgres:13
-    environment:
-      POSTGRES_DB: user_db
-  
-  postgres-product:
-    image: postgres:13
-    environment:
-      POSTGRES_DB: product_db
-  
-  postgres-order:
-    image: postgres:13
-    environment:
-      POSTGRES_DB: order_db
-  
-  postgres-payment:
-    image: postgres:13
-    environment:
-      POSTGRES_DB: payment_db
-```
+**Files Modified:**
+- UserController, AuthController: `@RequestMapping("/api/v1/users")`
+- ProductController: `@RequestMapping("/api/v1/products")`
+- GatewayConfig: all routes use `/api/v1/...`
+- WebSecurityConfig, JwtAuthenticationFilter: paths updated to `/api/v1/...`
+
+---
+
+### [x] 2.4 Input Validation (Bean Validation) ✅
+**Difficulty:** ⭐ Easy | **Estimated Time:** 1-2 hours | **Status:** COMPLETED
+
+**Current State:**
+- ~~DTOs lack validation annotations~~ → UserRegistrationRequest, LoginRequest, ProductCreateDTO, SearchRequestDTO have annotations
+- ~~Invalid input can cause database errors~~ → MethodArgumentNotValidException handled by GlobalExceptionHandler with fieldErrors
+
+**What to Do:**
+- [x] Add `@Valid` to controller method parameters (register, login, createProduct, updateProduct, searchProducts)
+- [x] Add validation annotations to DTOs (`@NotBlank`, `@Email`, `@Size`, `@DecimalMin`, etc.)
+- [x] Handle `MethodArgumentNotValidException` in GlobalExceptionHandler
+- [x] Return user-friendly validation error messages (ErrorResponse with fieldErrors)
+
+**Files Modified:**
+- UserRegistrationRequest, LoginRequest: @Size, @Email, @NotBlank
+- ProductCreateDTO: @Size(max) for name, description
+- SearchRequestDTO: new DTO with @NotBlank @Size for search query
+- GlobalExceptionHandler: handleValidationException returns ErrorResponse with fieldErrors
+
+---
+
+### [x] 2.5 Database Per Service (True Separation) ✅
+**Difficulty:** ⭐⭐ Medium | **Estimated Time:** 2-3 hours | **Status:** COMPLETED (for user & product)
+
+**Current State:**
+- ~~All services share one database~~ → user-service uses `user_service_db`, product-service uses `product_db`
+- Each service's docker-compose has its own Postgres (and product has Redis); config-repo points each service to its DB
+
+**What to Do:**
+- [x] Separate PostgreSQL per service (user-service/docker-compose: user-db → user_service_db; product-service/docker-compose: product-db → product_db)
+- [x] Each service's datasource in config-repo points to its own DB URL
+- [x] Init scripts per database: `z-init-db/user_service_db.sql`, `z-init-db/product_db.sql`
+- [ ] When order-service, payment-service, notification-service are added: give each its own Postgres (and DB name) in their docker-compose and config
 
 ---
 

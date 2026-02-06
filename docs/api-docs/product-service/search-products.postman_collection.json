@@ -27,7 +27,7 @@
           "raw": "{\n  \"query\": \"laptop\"\n}"
         },
         "url": {
-          "raw": "{{baseUrl}}/api/products/search",
+          "raw": "{{baseUrl}}/api/v1/products/search",
           "host": ["{{baseUrl}}"],
           "path": ["api", "products", "search"]
         },

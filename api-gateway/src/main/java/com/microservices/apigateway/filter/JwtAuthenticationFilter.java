@@ -27,8 +27,8 @@ public class JwtAuthenticationFilter implements GlobalFilter, Ordered {
     
     // Public endpoints that don't require authentication
     private static final List<String> PUBLIC_ENDPOINTS = Arrays.asList(
-            "/api/users/register",
-            "/api/users/login",
+            "/api/v1/users/register",
+            "/api/v1/users/login",
             "/health",
             "/info",
             "/actuator"
@@ -36,8 +36,8 @@ public class JwtAuthenticationFilter implements GlobalFilter, Ordered {
     
     // Admin-only endpoints
     private static final List<String> ADMIN_ENDPOINTS = Arrays.asList(
-            "/api/users/admin",
-            "/api/products/admin"
+            "/api/v1/users/admin",
+            "/api/v1/products/admin"
     );
     
     @Override
@@ -119,10 +119,10 @@ public class JwtAuthenticationFilter implements GlobalFilter, Ordered {
     }
     
     private boolean isUserSpecificEndpoint(String path, String method) {
-        // Check if the endpoint is user-specific (e.g., /api/users/profile, /api/orders/user/{userId})
-        return path.startsWith("/api/users/profile") || 
-               path.matches("/api/users/\\d+") || 
-               path.matches("/api/orders/user/\\d+");
+        // Check if the endpoint is user-specific (e.g., /api/v1/users/profile, /api/v1/orders/user/{userId})
+        return path.startsWith("/api/v1/users/profile") ||
+               path.matches("/api/v1/users/\\d+") ||
+               path.matches("/api/v1/orders/user/\\d+");
     }
     
     private boolean hasUserAccess(String path, String userId, String role) {
@@ -132,18 +132,18 @@ public class JwtAuthenticationFilter implements GlobalFilter, Ordered {
         }
         
         // Check if user is accessing their own profile
-        if (path.startsWith("/api/users/profile")) {
+        if (path.startsWith("/api/v1/users/profile")) {
             return true; // Profile endpoint is for the authenticated user
         }
         
         // Check if user is accessing their own data by ID
-        if (path.matches("/api/users/\\d+")) {
+        if (path.matches("/api/v1/users/\\d+")) {
             String pathUserId = path.substring(path.lastIndexOf('/') + 1);
             return userId.equals(pathUserId);
         }
         
         // Check if user is accessing their own orders
-        if (path.matches("/api/orders/user/\\d+")) {
+        if (path.matches("/api/v1/orders/user/\\d+")) {
             String pathUserId = path.substring(path.lastIndexOf('/') + 1);
             return userId.equals(pathUserId);
         }

@@ -52,8 +52,8 @@ public class WebSecurityConfig {
             .csrf(AbstractHttpConfigurer::disable)
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> 
-                auth.requestMatchers("/api/users/register").permitAll()
-                    .requestMatchers("/api/users/login").permitAll()
+                auth.requestMatchers("/api/v1/users/register").permitAll()
+                    .requestMatchers("/api/v1/users/login").permitAll()
                     .requestMatchers("/actuator/**").permitAll()
                     .anyRequest().permitAll()  // Allow all requests - API Gateway handles authorization
             );

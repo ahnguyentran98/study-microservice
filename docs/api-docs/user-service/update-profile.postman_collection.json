@@ -36,7 +36,7 @@
           "raw": "{\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\",\n  \"phone\": \"+1234567890\",\n  \"address\": \"456 New St\"\n}"
         },
         "url": {
-          "raw": "{{baseUrl}}/api/users/profile",
+          "raw": "{{baseUrl}}/api/v1/users/profile",
           "host": ["{{baseUrl}}"],
           "path": ["api", "users", "profile"]
         },

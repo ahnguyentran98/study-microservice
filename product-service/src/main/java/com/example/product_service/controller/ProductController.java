@@ -2,6 +2,7 @@ package com.example.product_service.controller;
 
 import com.example.product_service.dto.ProductCreateDTO;
 import com.example.product_service.dto.ProductResponseDTO;
+import com.example.product_service.dto.SearchRequestDTO;
 import com.example.product_service.service.ProductService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -20,7 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/products")
+@RequestMapping("/api/v1/products")
 @Tag(name = "Product Service", description = "Product management operations")
 @CrossOrigin(origins = "*")
 public class ProductController {
@@ -89,13 +90,8 @@ public class ProductController {
     @PostMapping("/search")
     @Operation(summary = "Search products", description = "Search products by name")
     public ResponseEntity<List<ProductResponseDTO>> searchProducts(
-            @Parameter(description = "Search criteria") @RequestBody Map<String, String> searchRequest) {
-        String query = searchRequest.get("query");
-        if (query == null || query.trim().isEmpty()) {
-            return ResponseEntity.badRequest().build();
-        }
-
-        List<ProductResponseDTO> products = productService.searchByName(query);
+            @Valid @RequestBody SearchRequestDTO searchRequest) {
+        List<ProductResponseDTO> products = productService.searchByName(searchRequest.getQuery());
         return ResponseEntity.ok(products);
     }
 }

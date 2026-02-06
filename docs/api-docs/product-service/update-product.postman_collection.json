@@ -36,7 +36,7 @@
           "raw": "{\n  \"name\": \"Updated Headphones\",\n  \"description\": \"Updated description\",\n  \"price\": 89.99,\n  \"stock\": 100,\n  \"category\": \"Electronics\",\n  \"imageUrl\": \"https://example.com/new-headphones.jpg\"\n}"
         },
         "url": {
-          "raw": "{{baseUrl}}/api/products/1",
+          "raw": "{{baseUrl}}/api/v1/products/1",
           "host": ["{{baseUrl}}"],
           "path": ["api", "products", "1"]
         },

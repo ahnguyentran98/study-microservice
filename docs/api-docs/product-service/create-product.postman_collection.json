@@ -36,7 +36,7 @@
           "raw": "{\n  \"name\": \"Wireless Headphones\",\n  \"description\": \"High-quality bluetooth headphones\",\n  \"price\": 99.99,\n  \"stock\": 50,\n  \"category\": \"Electronics\",\n  \"imageUrl\": \"https://example.com/headphones.jpg\"\n}"
         },
         "url": {
-          "raw": "{{baseUrl}}/api/products",
+          "raw": "{{baseUrl}}/api/v1/products",
           "host": ["{{baseUrl}}"],
           "path": ["api", "products"]
         },

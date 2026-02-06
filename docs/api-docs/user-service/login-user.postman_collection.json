@@ -45,7 +45,7 @@
           "raw": "{\n  \"email\": \"john@example.com\",\n  \"password\": \"securePassword123\"\n}"
         },
         "url": {
-          "raw": "{{baseUrl}}/api/users/login",
+          "raw": "{{baseUrl}}/api/v1/users/login",
           "host": ["{{baseUrl}}"],
           "path": ["api", "users", "login"]
         },

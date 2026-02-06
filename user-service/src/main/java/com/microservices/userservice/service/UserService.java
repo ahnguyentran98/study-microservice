@@ -1,6 +1,8 @@
 package com.microservices.userservice.service;
 
 import com.microservices.userservice.dto.UserRegistrationRequest;
+import com.microservices.userservice.exception.BusinessException;
+import com.microservices.userservice.exception.ResourceNotFoundException;
 import com.microservices.userservice.model.User;
 import com.microservices.userservice.repository.UserRepository;
 import com.microservices.userservice.security.UserPrincipal;
@@ -42,7 +44,7 @@ public class UserService implements UserDetailsService {
         logger.info("Registering new user with email: {}", registrationRequest.getEmail());
         
         if (userRepository.existsByEmail(registrationRequest.getEmail())) {
-            throw new RuntimeException("Email is already taken!");
+            throw new BusinessException("Email is already taken!");
         }
         
         User user = new User();
@@ -71,7 +73,7 @@ public class UserService implements UserDetailsService {
     
     public User updateUser(Long id, User userDetails) {
         User user = userRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("User not found with id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("User", "id", id));
         
         user.setFirstName(userDetails.getFirstName());
         user.setLastName(userDetails.getLastName());
@@ -83,7 +85,7 @@ public class UserService implements UserDetailsService {
     
     public void deleteUser(Long id) {
         User user = userRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("User not found with id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("User", "id", id));
         
         userRepository.delete(user);
         logger.info("User deleted with ID: {}", id);

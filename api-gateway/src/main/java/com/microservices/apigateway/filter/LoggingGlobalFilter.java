@@ -16,13 +16,18 @@ import java.util.UUID;
 @Slf4j
 public class LoggingGlobalFilter implements GlobalFilter, Ordered {
 
+    public static final String CORRELATION_ID_HEADER = "X-Correlation-ID";
+
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         ServerHttpRequest request = exchange.getRequest();
-        String requestId = UUID.randomUUID().toString();
+        String correlationId = request.getHeaders().getFirst(CORRELATION_ID_HEADER);
+        if (correlationId == null || correlationId.isBlank()) {
+            correlationId = UUID.randomUUID().toString();
+        }
         
-        // Log request details
-        log.info("🔵 [REQUEST] {} | {} {} | Headers: {} | Remote Address: {} | Request ID: {}", 
+        // Log request details with correlation ID for tracing
+        log.info("🔵 [REQUEST] {} | {} {} | Headers: {} | Remote Address: {} | Correlation-ID: {}", 
                 LocalDateTime.now(),
                 request.getMethod(),
                 request.getURI(),
@@ -31,11 +36,11 @@ public class LoggingGlobalFilter implements GlobalFilter, Ordered {
                     .map(entry -> entry.getKey() + "=" + entry.getValue())
                     .toList(),
                 request.getRemoteAddress(),
-                requestId);
+                correlationId);
         
-        // Add request ID to headers for downstream services
+        // Forward correlation ID to downstream services for request tracing
         ServerHttpRequest mutatedRequest = request.mutate()
-                .header("X-Request-ID", requestId)
+                .header(CORRELATION_ID_HEADER, correlationId)
                 .build();
         
         ServerWebExchange mutatedExchange = exchange.mutate()
@@ -47,23 +52,23 @@ public class LoggingGlobalFilter implements GlobalFilter, Ordered {
         return chain.filter(mutatedExchange)
                 .doOnSuccess(aVoid -> {
                     long duration = System.currentTimeMillis() - startTime;
-                    log.info("🟢 [RESPONSE] {} | {} {} | Status: {} | Duration: {}ms | Request ID: {}", 
+                    log.info("🟢 [RESPONSE] {} | {} {} | Status: {} | Duration: {}ms | Correlation-ID: {}", 
                             LocalDateTime.now(),
                             request.getMethod(),
                             request.getURI(),
                             exchange.getResponse().getStatusCode(),
                             duration,
-                            requestId);
+                            correlationId);
                 })
                 .doOnError(throwable -> {
                     long duration = System.currentTimeMillis() - startTime;
-                    log.error("🔴 [ERROR] {} | {} {} | Error: {} | Duration: {}ms | Request ID: {}", 
+                    log.error("🔴 [ERROR] {} | {} {} | Error: {} | Duration: {}ms | Correlation-ID: {}", 
                             LocalDateTime.now(),
                             request.getMethod(),
                             request.getURI(),
                             throwable.getMessage(),
                             duration,
-                            requestId);
+                            correlationId);
                 });
     }
 

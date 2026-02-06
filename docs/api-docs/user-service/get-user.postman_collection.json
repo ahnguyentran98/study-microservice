@@ -28,7 +28,7 @@
           }
         ],
         "url": {
-          "raw": "{{baseUrl}}/api/users/1",
+          "raw": "{{baseUrl}}/api/v1/users/1",
           "host": ["{{baseUrl}}"],
           "path": ["api", "users", "1"]
         },
