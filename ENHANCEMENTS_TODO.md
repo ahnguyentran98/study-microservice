@@ -11,7 +11,8 @@
 | 🟢 Tier 1 | Essential Patterns | 4 | 4 |
 | 🟡 Tier 2 | Core Concepts | 5 | 5 |
 | 🔵 Tier 3 | Advanced Patterns | 0 | 4 |
-| **Total** | | **9** | **13** |
+| 🟣 Frontend | Basic UI | 0 | 1 |
+| **Total** | | **9** | **14** |
 
 ---
 
@@ -346,6 +347,78 @@ zipkin:
 
 ---
 
+## 🟣 FRONTEND: Basic UI for Backend Services
+> **Priority:** MEDIUM | **Difficulty:** Beginner–Intermediate | **Impact:** End-to-end demo and manual testing of APIs
+
+### [ ] F.1 Basic Frontend Application
+**Difficulty:** ⭐⭐ Medium | **Estimated Time:** 4–6 hours
+
+**Current State:**
+- No frontend; APIs are exercised via Postman or curl only.
+- Backend exposes user-service (auth, profile) and product-service (CRUD, search) via API Gateway at `/api/v1/`.
+
+**Goal:**
+- Provide a **basic UI** that talks to the API Gateway so users can register, login, view profile, list products, view product detail, and search products—without building a full e‑commerce experience.
+
+**What to Do:**
+- [ ] Create a frontend app (recommended: **Vue.js 3** + **Pinia** + **Vuetify** per project README, or React + similar).
+- [ ] Configure API client to use **API Gateway base URL** (e.g. `http://localhost:8080`) and **versioned paths** (`/api/v1/users`, `/api/v1/products`).
+- [ ] Implement **auth flow**: Register, Login, store JWT (e.g. localStorage/sessionStorage), send `Authorization: Bearer <token>` on protected requests; optional logout.
+- [ ] Implement **user-facing pages**: Login/Register forms, optional Profile view (GET/PUT profile using headers from gateway).
+- [ ] Implement **product-facing pages**: Product list (GET paginated), Product detail (GET by id), Search (POST `/api/v1/products/search` with `{ "query": "..." }`).
+- [ ] Display API errors using the backend **ErrorResponse** shape (message, status, optional fieldErrors) where applicable.
+- [ ] Optional: simple nav (e.g. Home, Products, Login/Register or Profile) and basic loading/error states.
+
+**Suggested Structure:**
+```
+frontend/
+├── package.json
+├── vite.config.js (or vue-cli)
+├── index.html
+├── src/
+│   ├── main.js
+│   ├── App.vue
+│   ├── api/
+│   │   ├── client.js          # Axios/fetch base URL = gateway, /api/v1
+│   │   ├── auth.js             # register, login
+│   │   └── products.js         # list, get, search
+│   ├── stores/
+│   │   └── auth.js             # Pinia: user, token, login, logout
+│   ├── views/
+│   │   ├── HomeView.vue
+│   │   ├── LoginView.vue
+│   │   ├── RegisterView.vue
+│   │   ├── ProfileView.vue
+│   │   ├── ProductListView.vue
+│   │   └── ProductDetailView.vue
+│   ├── components/             # optional: ProductCard, AppNav, etc.
+│   └── router/
+│       └── index.js
+└── README.md                   # how to run (npm install, npm run dev, gateway URL)
+```
+
+**API Endpoints to Use (via Gateway):**
+| Feature        | Method | Path |
+|----------------|--------|------|
+| Register       | POST   | `/api/v1/users/register` |
+| Login          | POST   | `/api/v1/users/login` |
+| Get profile    | GET    | `/api/v1/users/profile` (requires JWT) |
+| Update profile | PUT    | `/api/v1/users/profile` (requires JWT) |
+| List products  | GET    | `/api/v1/products?page=0&size=20&sortBy=name&sortDir=asc` |
+| Get product    | GET    | `/api/v1/products/{id}` |
+| Search products| POST   | `/api/v1/products/search` body `{ "query": "..." }` |
+
+**Files to Create/Modify:**
+- New `frontend/` directory and files as above.
+- Optional: root `docker-compose.yml` or `frontend/README.md` with env var for gateway URL (e.g. `VITE_API_BASE_URL=http://localhost:8080`).
+
+**Notes:**
+- Keep UI minimal: forms, tables/cards, and basic navigation are enough.
+- CORS must allow the frontend origin if running on a different port (e.g. 5173); API Gateway/CorsConfig may need to allow it.
+- Completing this satisfies the “Update frontend API client base URLs” item referenced in 2.3 API Versioning.
+
+---
+
 ## 📋 Quick Reference: Enhancement Dependencies
 
 ```mermaid
@@ -387,6 +460,9 @@ graph TD
 12. [ ] 3.2 Event Sourcing
 13. [ ] 3.3 CQRS
 
+### Frontend (any time after Tier 2)
+14. [ ] F.1 Basic Frontend Application — Login, Register, Profile, Product list/detail, Search using `/api/v1/` via Gateway
+
 ---
 
 ## 📝 Notes
@@ -395,7 +471,8 @@ graph TD
 - Start with Tier 1 items for maximum learning value
 - Test thoroughly after each enhancement before moving to the next
 - Update this file as you complete items: `[ ]` → `[x]`
+- **Frontend (F.1)** can be done once Tier 2 is in place so the UI uses versioned APIs (`/api/v1/`) and standardized error responses.
 
 ---
 
-*Last Updated: 2026-02-03*
+*Last Updated: 2026-02-06*
