@@ -1,0 +1,246 @@
+---
+alwaysApply: true
+---
+
+**This is Step 3** of the feature implementation workflow:
+1. Feature Docs → `docs/feature-docs/<feature-name>.md`
+2. API Docs → `docs/api-docs/<feature-name>.postman_collection.json`
+3. ✅ **Implementation** → actual code
+
+---
+
+## Before Implementing
+
+**ALWAYS check that Steps 1 & 2 are complete:**
+```bash
+# Check feature doc exists
+view_file docs/feature-docs/<feature-name>.md
+
+# Check API doc exists  
+view_file docs/api-docs/<feature-name>.postman_collection.json
+```
+
+**ALWAYS check if code already exists:**
+```bash
+grep_search Query="methodName" or "ClassName" in the service directory
+find_by_name Pattern="*Service.java" or "*Repository.java"
+```
+
+---
+
+## ⚠️ MANDATORY: Investigate & Plan Before Coding
+
+**NEVER start coding immediately.** Always follow this investigation flow:
+
+### Step 1: Investigate Existing Code
+```bash
+# Find related files in the target service
+find_by_name Pattern="*<Feature>*" in <service>/src/main/java
+
+# Search for similar implementations
+grep_search Query="<keyword>" in <service>/src/main/java
+
+# Check existing entities, DTOs, controllers
+view_file_outline <service>/src/main/java/.../entity/
+view_file_outline <service>/src/main/java/.../controller/
+```
+
+### Step 2: Understand Dependencies
+```bash
+# Check inter-service calls
+grep_search Query="WebClient" in <service>/src/main/java
+
+# Check message handlers
+grep_search Query="@RabbitListener" in <service>/src/main/java
+
+# Check existing configurations
+view_file <service>/src/main/resources/application.yml
+```
+
+### Step 3: Create Implementation Plan
+Before writing any code, document your plan:
+
+1. **What files to create/modify?**
+   - New entities, DTOs, controllers, services, repositories
+
+2. **What dependencies are needed?**
+   - External services, libraries, database changes
+
+3. **What is the order of implementation?**
+   - Entity → Repository → Service → Controller → Config
+
+4. **What could go wrong?**
+   - Identify potential issues and edge cases
+
+### Step 4: Implement in Order
+Follow this standard implementation order:
+```
+1. Entity/Model classes
+2. Repository interfaces
+3. DTO classes (Request/Response)
+4. Service layer (business logic)
+5. Controller layer (REST endpoints)
+6. Configuration (if needed)
+7. Tests
+```
+
+---
+
+## Rule 1: Naming Conventions (Java/camelCase)
+
+### Variables & Methods
+```java
+// ✅ CORRECT - camelCase
+private String userName;
+public void calculateTotalPrice() { }
+
+// ❌ WRONG
+private String user_name;      // snake_case
+```
+
+### Classes & Interfaces
+```java
+// ✅ CORRECT - PascalCase
+public class OrderService { }
+public interface PaymentRepository { }
+```
+
+### Constants
+```java
+// ✅ CORRECT - UPPER_SNAKE_CASE
+public static final String DEFAULT_CURRENCY = "USD";
+```
+
+### Method Naming Patterns
+| Purpose | Pattern | Example |
+|---------|---------|---------|
+| Get single | `get` + Entity | `getUser()`, `getOrderById()` |
+| Get multiple | `getAll` / `find` | `getAllProducts()`, `findByStatus()` |
+| Create | `create` / `save` | `createOrder()`, `saveUser()` |
+| Update | `update` | `updateProfile()`, `updateStatus()` |
+| Delete | `delete` / `remove` | `deleteOrder()`, `removeItem()` |
+| Check | `is` / `has` / `can` | `isValid()`, `hasPermission()` |
+
+---
+
+## Rule 2: REST API Naming Convention (CRUD)
+
+### URL Structure
+```
+/api/v1/{resource}           # Collection
+/api/v1/{resource}/{id}      # Single item
+```
+
+### CRUD Operations
+| Operation | HTTP Method | URL Pattern | Controller Method |
+|-----------|-------------|-------------|-------------------|
+| **C**reate | POST | `/api/v1/orders` | `createOrder()` |
+| **R**ead (one) | GET | `/api/v1/orders/{id}` | `getOrderById()` |
+| **R**ead (all) | GET | `/api/v1/orders` | `getAllOrders()` |
+| **U**pdate | PUT | `/api/v1/orders/{id}` | `updateOrder()` |
+| **D**elete | DELETE | `/api/v1/orders/{id}` | `deleteOrder()` |
+
+### Naming Rules
+```
+✅ CORRECT                    ❌ WRONG
+/api/v1/users                 /api/v1/getUsers
+POST /api/v1/payments         POST /api/v1/createPayment
+DELETE /api/v1/users/{id}     GET /api/v1/deleteUser/{id}
+```
+
+---
+
+## Rule 3: Comment Complex Code
+
+```java
+// ✅ GOOD - Clear and concise
+/**
+ * Calculate order total with tax and discount applied.
+ */
+public BigDecimal calculateOrderTotal(Order order) {
+    // Get base price from all items
+    BigDecimal subtotal = calculateSubtotal(order.getItems());
+    
+    // Apply tax rate based on shipping region
+    BigDecimal taxAmount = calculateTax(subtotal, order.getRegion());
+    
+    return subtotal.add(taxAmount);
+}
+```
+
+---
+
+## Rule 4: Microservices Cautions ⚠️
+
+### Service Boundaries
+```
+⚠️ NEVER directly access another service's database
+⚠️ NEVER share entity classes between services
+✅ Use WebClient/REST calls for inter-service communication
+✅ Each service owns its data exclusively
+```
+
+### Configuration Management
+```
+⚠️ NEVER hardcode service URLs (use discovery-service)
+⚠️ NEVER commit secrets to config-repo
+✅ Use Config Server for externalized config
+✅ Use bootstrap.properties for config-server connection
+```
+
+Example:
+```java
+// ❌ WRONG - Hardcoded URL
+private String productServiceUrl = "http://localhost:8082";
+
+// ✅ CORRECT - Use service discovery
+@LoadBalanced
+private WebClient.Builder webClientBuilder;
+// Call via service name: "http://product-service/api/products"
+```
+
+### Asynchronous Messaging (RabbitMQ)
+```
+⚠️ NEVER assume message delivery is instant
+⚠️ NEVER put critical sync logic in message handlers
+✅ Design for eventual consistency
+✅ Implement idempotent message handlers
+✅ Add dead-letter queues for failed messages
+```
+
+### Distributed Transactions
+```
+⚠️ NEVER use @Transactional across multiple services
+⚠️ NEVER expect ACID guarantees across services
+✅ Use Saga pattern for multi-service operations
+✅ Implement compensation logic for rollbacks
+```
+
+### Circuit Breaker & Resilience
+```java
+@CircuitBreaker(name = "product-service", fallbackMethod = "getProductFallback")
+@Retry(name = "product-service")
+public Product getProduct(Long id) {
+    return webClient.get()
+        .uri("/api/products/{id}", id)
+        .retrieve()
+        .bodyToMono(Product.class)
+        .timeout(Duration.ofSeconds(5))  // Always set timeout!
+        .block();
+}
+```
+
+---
+
+## Checklist Before Commit
+
+- [ ] Feature doc exists in `docs/feature-docs/`?
+- [ ] API doc (Postman) exists in `docs/api-docs/`?
+- [ ] No hardcoded service URLs?
+- [ ] No cross-service database access?
+- [ ] WebClient calls have timeouts?
+- [ ] Circuit breaker on external calls?
+- [ ] Message handlers are idempotent?
+- [ ] Config externalized to Config Server?
+- [ ] Health endpoints working?
+---
