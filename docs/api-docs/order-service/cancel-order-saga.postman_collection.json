@@ -1,0 +1,43 @@
+{
+  "info": {
+    "name": "Cancel Order (Saga Compensation)",
+    "description": "Cancel an order and trigger compensation: refund payment and release inventory.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8080", "type": "string" },
+    { "key": "token", "value": "", "type": "string" },
+    { "key": "orderId", "value": "8742", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "Cancel Order (Saga Compensation)",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{token}}" }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/orders/{{orderId}}",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "orders", "{{orderId}}"]
+        },
+        "description": "Cancels an order if in cancellable state; refunds payment and releases inventory idempotently."
+      },
+      "response": [
+        {
+          "name": "200 OK - Cancelled",
+          "status": "OK",
+          "code": 200,
+          "body": "{\n  \"id\": 8742,\n  \"status\": \"CANCELLED\",\n  \"correlationId\": \"f2f6f1c0-5a6b-4a2e-9f3e-1dcf8b4b8b1d\"\n}"
+        },
+        {
+          "name": "409 Conflict - Not cancellable",
+          "status": "Conflict",
+          "code": 409,
+          "body": "{\n  \"message\": \"Order already SHIPPED\",\n  \"correlationId\": \"f2f6f1c0-5a6b-4a2e-9f3e-1dcf8b4b8b1d\"\n}"
+        }
+      ]
+    }
+  ]
+}

@@ -260,18 +260,19 @@ api-gateway LoggingGlobalFilter updated to use X-Correlation-ID
 ## 🔵 TIER 3: Advanced Patterns
 > **Priority:** LOW | **Difficulty:** Advanced | **Impact:** Deep understanding of distributed systems
 
-### [ ] 3.1 Saga Pattern (Orchestration)
-**Difficulty:** ⭐⭐⭐ Hard | **Estimated Time:** 6-8 hours
+### [ ] 3.1 Saga Pattern (Orchestration) 🚧
+**Difficulty:** ⭐⭐⭐ Hard | **Estimated Time:** 6-8 hours | **Status:** PARTIALLY IMPLEMENTED
 
 **Current State:**
-- Order creation updates stock but no rollback on payment failure
-- No compensation logic for failed transactions
+- ~~Order creation updates stock but no rollback on payment failure~~ → `SagaOrderService` creates orders as `PENDING`, reserves inventory, processes payment, and cancels on failure
+- ~~No compensation logic for failed transactions~~ → compensation is implemented for inventory release on create failure and refund + inventory release on cancel
+- Remaining gaps: no explicit saga step/state persistence beyond `OrderStatus`, error semantics are not fully aligned with the feature docs, and test coverage is still minimal
 
 **What to Do:**
-- [ ] Create `OrderSaga` orchestrator class
-- [ ] Implement step-by-step transaction with compensation
-- [ ] Add saga state management
-- [ ] Handle partial failures with rollback
+- [x] Create saga orchestrator service (`SagaOrderService`)
+- [x] Implement step-by-step transaction with compensation
+- [ ] Add explicit saga step/state management beyond `OrderStatus`
+- [x] Handle partial failures with rollback/compensation
 
 **Saga Flow:**
 ```

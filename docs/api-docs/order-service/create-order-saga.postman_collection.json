@@ -1,0 +1,53 @@
+{
+  "info": {
+    "name": "Create Order (Saga)",
+    "description": "Create an order via saga orchestration: reserve inventory, process payment, emit events.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8080", "type": "string" },
+    { "key": "token", "value": "", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "Create Order (Saga)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{token}}", "disabled": false }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"userId\": 42,\n  \"items\": [\n    { \"productId\": 1001, \"quantity\": 2 },\n    { \"productId\": 2002, \"quantity\": 1 }\n  ],\n  \"paymentMethod\": \"CARD\",\n  \"paymentToken\": \"tok_visa_123\",\n  \"clientRequestId\": \"9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/orders",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "orders"]
+        },
+        "description": "Creates an order and runs saga orchestration. Idempotent via clientRequestId."
+      },
+      "response": [
+        {
+          "name": "201 Created",
+          "status": "Created",
+          "code": 201,
+          "body": "{\n  \"id\": 8742,\n  \"status\": \"PAID\",\n  \"totalAmount\": 129.98,\n  \"correlationId\": \"f2f6f1c0-5a6b-4a2e-9f3e-1dcf8b4b8b1d\"\n}"
+        },
+        {
+          "name": "409 Conflict - Out of Stock",
+          "status": "Conflict",
+          "code": 409,
+          "body": "{\n  \"message\": \"Product 1001 insufficient stock\",\n  \"correlationId\": \"f2f6f1c0-5a6b-4a2e-9f3e-1dcf8b4b8b1d\"\n}"
+        },
+        {
+          "name": "402 Payment Required",
+          "status": "Payment Required",
+          "code": 402,
+          "body": "{\n  \"message\": \"Payment authorization failed\",\n  \"correlationId\": \"f2f6f1c0-5a6b-4a2e-9f3e-1dcf8b4b8b1d\"\n}"
+        }
+      ]
+    }
+  ]
+}
