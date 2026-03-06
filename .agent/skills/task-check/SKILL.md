@@ -1,6 +1,6 @@
 ---
 name: task-check
-description: Use when the user asks what task to implement next, wants to list tracked tasks, wants to check task status, or wants help choosing a task from docs/Tasks.md before planning implementation.
+description: Use when the user wants to choose the next tracked task from docs/Tasks.md, list open tracked tasks, validate a named tracked task, or decide which tracked task should move to planning next. Do not use for implementation planning, coding, documentation generation, or task completion reporting.
 ---
 
 # Task Check

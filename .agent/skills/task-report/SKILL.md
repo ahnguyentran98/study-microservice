@@ -1,6 +1,6 @@
 ---
 name: task-report
-description: Use after task implementation when the user wants to verify a task, mark a task complete, or update docs/Tasks.md after the relevant tests and smoke checks pass.
+description: Use after implementation when the user wants to verify a tracked task, run the planned validation for the touched area, and update docs/Tasks.md only if the required checks pass. Do not use for task selection, planning, documentation generation, or coding.
 ---
 
 # Task Report

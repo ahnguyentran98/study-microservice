@@ -1,6 +1,6 @@
 ---
 name: document-feature
-description: Use after task-plan approval when a tracked task changes API behavior or contracts and needs a feature doc under docs/feature-docs/<service-folder>/.
+description: Use after task-plan approval when an approved tracked task changes an API, contract, or externally visible feature flow and requires a feature document under docs/feature-docs/<service-folder>/. Do not use for task selection, planning approval, coding, or task completion reporting.
 ---
 
 # Document Feature

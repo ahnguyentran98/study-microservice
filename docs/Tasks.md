@@ -48,21 +48,23 @@ Bean Validation and validation error responses are wired into the implemented AP
 Current state:
 - `user-service` uses `user_service_db`
 - `product-service` uses `product_db`
+- `order-service` points to `order_service_db` in local application config
 
 Remaining work:
-- Split `order-service` into its own production-ready data setup
+- Externalize `order-service` database settings through `config-repo/`
+- Add `order-service` compose/bootstrap assets to match the other implemented services
 - Do the same for future `payment-service` and `notification-service`
 - Keep config and bootstrap scripts aligned with the separation
 
 ### [ ] 3.1 Saga pattern hardening
 
 Current state:
-- `order-service` already contains saga-oriented orchestration and compensation logic
+- `order-service` already contains create/cancel orchestration with inventory compensation and payment refund hooks
 
 Remaining work:
 - Add explicit saga step or state tracking beyond `OrderStatus`
-- Tighten error semantics around rollback paths
-- Expand automated test coverage
+- Tighten error semantics around rollback paths, especially partial compensation failures
+- Expand automated test coverage beyond the current context-load smoke test
 
 ## Backlog
 
@@ -103,4 +105,4 @@ Remaining work:
 - Use concise status notes tied to the actual source tree, not aspirational architecture.
 - If a task becomes large, link its supporting design or feature docs from `docs/feature-docs/`.
 
-*Last updated: 2026-03-06*
+*Last updated: 2026-03-07*

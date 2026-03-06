@@ -1,8 +1,7 @@
 ---
 name: task-plan
-description: Use after a tracked task is chosen when the user wants task execution planning; analyze the task, inspect the relevant code and docs, and produce an implementation plan plus test plan before any coding starts.
+description: Use after a tracked task from docs/Tasks.md has already been chosen and the user wants a pre-implementation plan. Analyze the selected tracked task, inspect relevant code and docs, produce an implementation plan and test plan, then stop for proceed or cancel. Do not use for task selection, coding, or completion reporting.
 ---
-
 # Task Plan
 
 Use this as the strict planning gate for tracked tasks.

@@ -1,6 +1,6 @@
 ---
 name: read-project
-description: Use when you need repository orientation for the study-microservice workspace, especially before task checking, task planning, or task implementation.
+description: Use only as an internal repository-orientation step before task-check, task-plan, or implement-feature when repository structure, affected services, or existing docs are still unclear. Do not use as the main response for ordinary coding, planning, or reporting requests.
 ---
 
 # Read Project

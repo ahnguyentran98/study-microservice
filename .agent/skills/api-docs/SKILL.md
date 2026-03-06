@@ -1,6 +1,6 @@
 ---
 name: api-docs
-description: Use after task-plan approval when a tracked task needs a Postman collection under docs/api-docs/<service-folder>/ for new or changed API behavior.
+description: Use after task-plan approval when an approved tracked task changes API behavior and requires a Postman collection under docs/api-docs/<service-folder>/. Use only for new or changed request or response behavior that should be documented for consumers. Do not use for task selection, planning approval, coding, or task completion reporting.
 ---
 
 # API Docs

@@ -1,6 +1,6 @@
 ---
 name: implement-feature
-description: Use after task-plan approval to implement a tracked task in code, and after document-feature/api-docs when the approved plan requires API documentation updates.
+description: Use after a tracked task has been chosen and task-plan has been approved to implement the approved task in code. If the approved plan includes API or contract documentation, use this only after document-feature and api-docs have been updated or in the same approved workflow. Do not use for task selection, planning, or task completion reporting.
 ---
 
 # Implement Feature
