@@ -1,0 +1,82 @@
+services:
+  order-db:
+    image: postgres:13
+    container_name: order-service-db
+    environment:
+      POSTGRES_DB: order_service_db
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5435:5432"
+    volumes:
+      - order_db_data:/var/lib/postgresql/data
+      - ../z-init-db/order_service_db.sql:/docker-entrypoint-initdb.d/order_service_db.sql
+    networks:
+      - microservices-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admin -d order_service_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  order-rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: order-service-rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_PASS: password
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - microservices-network
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  order-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: order-service-app
+    user: "1000:1000"
+    ports:
+      - "8083:8083"
+    volumes:
+      - ./src:/app/src
+      - ./build.gradle:/app/build.gradle
+      - ./settings.gradle:/app/settings.gradle
+    depends_on:
+      order-db:
+        condition: service_healthy
+      order-rabbitmq:
+        condition: service_healthy
+    environment:
+      - SERVER_PORT=8083
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://order-service-db:5432/order_service_db
+      - SPRING_DATASOURCE_USERNAME=admin
+      - SPRING_DATASOURCE_PASSWORD=password
+      - SPRING_RABBITMQ_HOST=order-rabbitmq
+      - SPRING_RABBITMQ_PORT=5672
+      - SPRING_RABBITMQ_USERNAME=admin
+      - SPRING_RABBITMQ_PASSWORD=password
+      - CONFIG_SERVER_URL=http://config-server-app:8888
+      - EUREKA_URL=http://discovery-service-app:8761/eureka/
+    networks:
+      - microservices-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8083/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+volumes:
+  order_db_data:
+
+networks:
+  microservices-network:
+    external: true

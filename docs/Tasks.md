@@ -41,20 +41,11 @@ Versioned API paths under `/api/v1/` are in use.
 
 Bean Validation and validation error responses are wired into the implemented APIs.
 
+### [x] 2.5 Database-per-service rollout
+
+`order-service` now loads its database settings from `config-repo/`, ships runnable compose/bootstrap assets, and the shared DB/bootstrap naming is aligned across the implemented services. Placeholder config and init scripts were also added for future `payment-service` and `notification-service`.
+
 ## In Progress
-
-### [ ] 2.5 Database-per-service rollout
-
-Current state:
-- `user-service` uses `user_service_db`
-- `product-service` uses `product_db`
-- `order-service` points to `order_service_db` in local application config
-
-Remaining work:
-- Externalize `order-service` database settings through `config-repo/`
-- Add `order-service` compose/bootstrap assets to match the other implemented services
-- Do the same for future `payment-service` and `notification-service`
-- Keep config and bootstrap scripts aligned with the separation
 
 ### [ ] 3.1 Saga pattern hardening
 

@@ -1,0 +1,1 @@
+-- Reserved for future payment-service schema bootstrap.
